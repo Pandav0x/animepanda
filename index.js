@@ -1,8 +1,13 @@
 var app = require('express')();
-const express = require("express");
+const fs = require('fs');
 var http = require('http').Server(app);
 var mysql = require('mysql');
 var Crawler = require("crawler");
+
+var animeList = [];
+
+var rawdata = fs.readFileSync('urls.json');  
+var urls = JSON.parse(rawdata); 
 
 /**
  * DB connection
@@ -21,26 +26,46 @@ dbconn.connect(function(err) {
 /**
  * Crawler setup
  */
-var crawler = new Crawler({
-    maxConnections : 10,
-    // This will be called for each crawled page
-    callback : function (error, res, done) {
-        if(error){
-            console.log(error);
-        }else{
-            var $ = res.$;
-            // $ is Cheerio by default
-            //a lean implementation of core jQuery designed specifically for the server
-            console.log($("title").text());
-        }
-        done();
-    }
-});
-
-crawler.queue(['http://google.com']);
+console.log("Crawler setup")
+var crawler = new Crawler();
 
 /**
- * Routing
+ * Crawling
+ */
+console.log("Finding anime list");
+crawler.queue([{
+    uri: urls["animeList"], 
+    callback: function (error, res, done) {
+        if(error)
+            console.log(error);
+        else
+        {
+            var $ = res.$;
+            //TODO: instert raw name in db
+            animeList = $(".anm_det_pop.pop_info")
+                .text()
+                .toLowerCase()
+                .replace(/!|:|;|\-|–|'|&|>|<|…|’|,|\?/g, '')
+                .replace(/^[\ ]*/gm, '')
+                .replace(/[\ ]*$/gm, '')
+                .replace(/\ /g, '-')
+                .split("\n")
+                .filter(function(entry) { 
+                    return entry.trim() != ''; 
+                });
+                
+        }
+
+        animeList.forEach(function(element){ //just a debug feature
+            console.log(element);
+        });
+
+        done();
+    }
+}]);
+
+/**
+ * Routing (cause, why not ?)
  */
 app.get('/', function(request, res){
     console.log("Connection from " + request.connection.remoteAddress);
@@ -51,5 +76,6 @@ app.get('/', function(request, res){
  * Entry point
  */
 http.listen(3000, function(){
+    console.clear();
     console.log('listening on *:3000');
 });
