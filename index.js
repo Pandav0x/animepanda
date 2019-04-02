@@ -40,6 +40,7 @@ var crawler = new Crawler();
 console.log("Finding anime list");
 crawler.queue([{
     uri: urls["animeList"],
+    skipDuplicates: true,
     retries: 0,
     maxConnections : 1,
     skipEventRequest: false,
@@ -68,10 +69,11 @@ crawler.queue([{
                     return;
                 crawler.queue({
                     uri: (urls["animeBasePage"] + element),
+                    skipDuplicates: true,
                     retries: 0,
                     maxConnections : 5,
-                    rateLimit: 1000,
-                    retryTimeout: 5000,
+                    rateLimit: 10000,
+                    retryTimeout: 1000,
                     callback: function (error, res, done) {
                         if(error)
                             return;
@@ -87,9 +89,10 @@ crawler.queue([{
                         animeEpisodeList.forEach(function(animeEp){
                             crawler.queue({
                                 uri: animeEp,
+                                skipDuplicates: true,
                                 retries: 0,
                                 maxConnections : 10,
-                                rateLimit: 1000,
+                                rateLimit: 10000,
                                 retryTimeout: 5000,
                                 callback: function (error, res, done) {
                                     if(error)
@@ -125,7 +128,6 @@ crawler.queue([{
         done();
     }
 }]);
-console.log("finished");
 
 /**
  * Routing (cause, why not ?)
@@ -139,6 +141,5 @@ app.get('/', function(request, res){
  * Entry point
  */
 http.listen(3000, function(){
-    console.clear();
     console.log('listening on *:3000');
 });
