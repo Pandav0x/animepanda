@@ -1,96 +1,108 @@
 'use strict';
 
-var app = require('express')();
-const fs = require('fs');
-var http = require('http').Server(app);
-var mysql = require('mysql');
-var Crawler = require("js-crawler");
-var Base64 = require('base-64');
+/**
+ * Adding behavior
+ */
+String.prototype.contains = function(needles){
+    var ans = false;
+    if(needles != null){
+      var subject = this;
+      needles.forEach(function(needle){
+          if(subject.includes(needle))
+              ans = true;
+      });
+    }
+    return ans;
+}
 
-var animeList = [];
-var animeEpisodeList = [];
+/**
+ * Dependencies
+ */
+const app       = require('express')();
+const fs        = require('fs');
+const http      = require('http').Server(app);
+const mysql     = require('mysql');
+const Crawler   = require("js-crawler");
+var cheerio     = require("cheerio");
 
-var rawdata = fs.readFileSync('urls.json');  
-var urls = JSON.parse(rawdata); 
+/**
+ * Loading conf file
+ */
+var config = JSON.parse(fs.readFileSync('config.json')); 
 
 /**
  * DB connection
  */
-var dbconn = mysql.createConnection({
+var dbConnection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
     password: "",
     database: "animepanda"
 });
 
-dbconn.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected to database");
+dbConnection.connect(function(err) {
+    if (err)
+        console.log("could not establish connection with database (" + err + ")");
+    else
+        console.log("Connected to database.");
 });
 
 /**
  * Crawler setup
  */
-console.log("Crawler setup")
-var crawler = new Crawler();
+console.log("Crawler setup");
+var crawlerOptions = {
+    depth: 3,
+    userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    maxRequestsPerSecond: 3,
+    maxConcurrentRequests: 20
+};
+console.log("current crawler config: %j", crawlerOptions);
+var crawler = new Crawler().configure(crawlerOptions);
 
 /**
  * Crawling
  */
 console.log("Finding anime list");
+var startTime = new Date();
 
-function getAnimeList()
-{
-    //uri: urls["animeList"],
-    //TODO: instert raw name in db
-    animeList = $(".anm_det_pop.pop_info")
-                            .text()
-                            .toLowerCase()
-                            .replace(/!|:|;|\-|–|'|&|>|<|…|’|,|\?|"|`|%22/g, '')
-                            .replace(/^[\ ]*/gm, '')
-                            .replace(/[\ ]*$/gm, '')
-                            .replace(/\ /g, '-')
-                            .replace(/\r/g, '')
-                            .split("\n")
-                            .filter(function(entry) { 
-                                return entry.trim() != ''; 
-                            });
-    return;
-}
-
-function getEpisodeViewUrl()
-{
-    //element.includes("☆","♥","∞")
-    //animeList.forEach(function(element){
-    var $ = res.$;
-    if($("article.item>div.poster>div.season_m>a") == null)
-        return;
-    $("article.item>div.poster>div.season_m>a").get().forEach(function(a){
-        animeEpisodeList.push(a.attribs["href"]);
-    });
-    return;
-}
-
-function getUrls()
-{
-    //forEach(function(animeEp){
-    var $ = res.$;
-    var tmpUrl = $("iframe.metaframe", res.body).attr("src");
-    var episodeUrlEncoded = tmpUrl.substring(tmpUrl.indexOf("?p=")+3);
-    var episodeUrl = episodeUrlEncoded;
-    try 
-    {
-        episodeUrl = Base64.decode(episodeUrlEncoded);
+crawler.crawlFiltered({
+    url: config["url"],
+    includes: config["includes"],
+    excludes: config["excludes"],
+    success: function(page){
+        onlineWrite(page.url, 50);
+        var $ = cheerio.load(page.body)
+        var url = null;
+        url = $("iframe.metaframe.rptss").attr("src");
+        if(url != null){
+            var tmp = $("head>title").text();
+            var animeName = tmp.substr(7, (tmp.lastIndexOf("Episode")-8)).replace(/!|:|;|\-|–|'|&|>|<|…|’|,|\?|"|`/g, '');
+            var episodeUrlEncoded = url.substring(url.indexOf("?p=")+3);
+            var url = episodeUrlEncoded;
+            try 
+            {  url = Base64.decode(episodeUrlEncoded); }
+            catch(error){}
+            if(!url.includes("//"))
+                url = config["serverurl"] + url;
+            dbConnection.query("INSERT INTO animesurls (animeurl, animename) VALUES (\'" + url.replace(/tps:\/\//g, "http:\/\/") + "\', \'" + animeName + "\');");
+        }
+    },
+    failure: function(page){
+        onlineWrite("status " + page.status + " for " + page.url, 70);
+    }, 
+    finished: function(crawledUrls){
+        console.log("total: " + crawledUrls.length + " urls crawled");
+        var endTime = new Date() - startTime;
+        console.log("Execution time: %dms", endTime);
     }
-    catch(error){}
-    if(!episodeUrl.includes("//"))
-        episodeUrl = urls["repoUrl"] + episodeUrl;    
-    episodeUrl = episodeUrl.replace(/'/, "\\'")
-                            .replace(/tps:\/\//g, '');
-    console.log(episodeUrl);
-    if(episodeUrl!= null && episodeUrl.endsWith(".mp4"))
-        dbconn.query("INSERT INTO animesurls (animeurl) VALUES (\'" + urls["repoUrl"] + episodeUrl + "\');");
-    return;
+});
+
+function onlineWrite(string, crop = 200)
+{
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
+    process.stdout.write((string.length > crop)? string.substring(0,crop) : string);
 }
 
 /**
@@ -99,11 +111,4 @@ function getUrls()
 app.get('/', function(request, res){
     console.log("Connection from " + request.connection.remoteAddress);
     res.sendFile(__dirname+'/public/index.html');
-});
-
-/**
- * Entry point
- */
-http.listen(3000, function(){
-    console.log('listening on *:3000');
 });
