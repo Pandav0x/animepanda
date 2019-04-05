@@ -41,6 +41,3 @@ and
       }
      
 this condition to place just after the `if (_.contains(self._currentUrlsToCrawl, url) || _.contains(_.keys(self.knownUrls), url)) {` statement in the `Crawler.prototype._requestUrl` method definition.
-
-
-And, that's it !
