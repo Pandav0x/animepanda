@@ -18,12 +18,12 @@ String.prototype.contains = function(needles){
 /**
  * Dependencies
  */
-const app       = require('express')();
 const fs        = require('fs');
 const http      = require('http').Server(app);
 const mysql     = require('mysql');
 const Crawler   = require("js-crawler");
 var cheerio     = require("cheerio");
+var Base64      = require("base-64")
 
 /**
  * Loading conf file
@@ -77,15 +77,24 @@ crawler.crawlFiltered({
         url = $("iframe.metaframe.rptss").attr("src");
         if(url != null){
             var tmp = $("head>title").text();
-            var animeName = tmp.substr(7, (tmp.lastIndexOf("Episode")-8)).replace(/!|:|;|\-|–|'|&|>|<|…|’|,|\?|"|`/g, '');
+            var animeName = tmp.substr(7, (tmp.lastIndexOf("Episode")-8))
+                                .replace(/\'/gm, '\\\'');
             var episodeUrlEncoded = url.substring(url.indexOf("?p=")+3);
             var url = episodeUrlEncoded;
             try 
             {  url = Base64.decode(episodeUrlEncoded); }
             catch(error){}
             if(!url.includes("//"))
-                url = config["serverurl"] + url;
-            dbConnection.query("INSERT INTO animesurls (animeurl, animename) VALUES (\'" + url.replace(/tps:\/\//g, "http:\/\/") + "\', \'" + animeName + "\');");
+                url = (config["serverurl"] + url)
+            url = url.replace(/\'/gm, '\\\'').replace(/tps:\/\//gm, "http:\/\/");;
+            try{
+                onlineWrite("INSERT INTO animesurls (animeurl, animename) VALUES (\'" + url + "\', \'" + animeName + "\');");
+                dbConnection.query("INSERT INTO animesurls (animeurl, animename) VALUES (\'" + url + "\', \'" + animeName + "\');");
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
         }
     },
     failure: function(page){
@@ -104,11 +113,3 @@ function onlineWrite(string, crop = 200)
     process.stdout.cursorTo(0);
     process.stdout.write((string.length > crop)? string.substring(0,crop) : string);
 }
-
-/**
- * Routing (cause, why not ?)
- */
-app.get('/', function(request, res){
-    console.log("Connection from " + request.connection.remoteAddress);
-    res.sendFile(__dirname+'/public/index.html');
-});
