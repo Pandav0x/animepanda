@@ -4,7 +4,8 @@
     "dependencies": {
         "base-64": "^0.1.0",
         "cheerio": "^1.0.0-rc.2",
-        "js-crawler": "^0.3.21",
-        "mysql": "^2.16.0"
+        "mysql": "^2.16.0",
+        "request": "^2.88.0",
+        "underscore": "^1.9.1"
     }
 }
