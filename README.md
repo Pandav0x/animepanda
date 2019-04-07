@@ -9,35 +9,32 @@
 - Create a `config.json` file in the root directory of the project.
 
         {
-            "url": "http://animesite.com/anime-list/",
-            "excludes" : [""],
-            "includes" : [""],
-            "serverurl" : "http://openload.com/"
+            "website":{
+                "url": "http://yoururl.com/animeslist/" ,
+                "excludes" : [],
+                "includes" : [],
+                "serverurl" : "http://mega.nz/",
+                "videoselector" : "iframe.metaframe.rptss"
+            },
+            "database":{
+                "host": "127.0.0.1" ,
+                "port" : "3306" ,
+                "user": "user",
+                "password" : "password" ,
+                "database" : "databasename" 
+            },
+            "crawler":
+            {
+                "depth": 1,
+                "userAgent": "your user agent",
+                "maxRequestsPerSecond": 5,
+                "maxConcurrentRequests": 100
+            }
         }
-    - `url` : your anime source
+    - `url` : your anime list source
     - `excludes` : exlude path including this
     - `includes` : will only crawl if the url contains one of it
     - `serverurl` : external server that physically have the videos
-- You can type `node index.js` (provided that your mysql server is runing on the `:3306` port)
-
-I had to change the js-crawler script a bit to fix some isues I had
-
-    Crawler.prototype.crawlFiltered = function(params) {
-      params.includes || [];
-      params.excludes || [];
-      if(String(params.url).contains(params.includes) && !String(params.url).contains(params.excludes))
-      {
-          this.includes = params.includes;
-          this.excludes = params.excludes;
-          this.crawl(params.url, params.success, params.failure, params.finished);
-      }
-      return this;
-    }
-   
-and
-
-      if(!url.contains(self.includes) || url.contains(self.excludes)){
-        return;
-      }
-     
-this condition to place just after the `if (_.contains(self._currentUrlsToCrawl, url) || _.contains(_.keys(self.knownUrls), url)) {` statement in the `Crawler.prototype._requestUrl` method definition.
+    - `videoselector` : css selector to get the url of the anime from
+    - The other ones should be self-explanatory
+- You can type `node index.js`
