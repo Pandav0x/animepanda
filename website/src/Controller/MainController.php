@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ContactType;
 use App\Form\DTO\ContactHandler;
 
-class MainController implements AbstarctContoller
+class MainController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
      */
     public function homepage(): Response
     {
-        return $this->render();
+        return $this->render("pages/index.html.twig");
     }
 }
