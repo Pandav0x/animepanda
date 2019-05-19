@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tag index{% endblock %}
+
+{% block main %}
+    <h1>Pick your kink</h1>
+        <div id="tag-table">
+            {% for tag in tags %}
+                <a class="tag-item" href="{{ path('tag_show', {'id': tag.id}) }}">{{ tag.name }}</a>
+            {% else %}
+                    no tags found
+            {% endfor %}
+        </div>
+{% endblock %}

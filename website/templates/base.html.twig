@@ -2,18 +2,35 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Anime Panda - {% block subtitle %} {% endblock %}{% endblock %}</title>
-        <link href="{{ asset("css/app.css") }}" rel="stylesheet"/>
-        
-        {% block stylesheets %}{% endblock %}
+        <title>
+            {% block title %}
+                Anime Panda - 
+                {% block subtitle %} 
+                
+                {% endblock %}
+            {% endblock %}
+        </title>        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags("app") }}
+        {% endblock %}
     </head>
     <body>
-        {% include 'partials/header.html.twig' %}
+        {% block body %}
+            {% include 'partials/header.html.twig' %}
 
-        {% block body %}{% endblock %}
+            <main>
+                {% block main %}{% endblock %}
+            </main>
 
- 
-        {% include 'partials/footer.html.twig' %}
-        {% block javascripts %}{% endblock %}
+            <aside>
+                {% block aside %}{% endblock %}
+            </aside>
+
+            {% include 'partials/footer.html.twig' %}
+            
+            {% block javascripts %}
+                {{ encore_entry_script_tags("app") }}
+            {% endblock %}
+        {% endblock %}
     </body>
 </html>

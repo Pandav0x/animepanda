@@ -1,3 +1,11 @@
 <header>
-    DA HEADA !
+
+    <nav id="top-nav">
+        <img id="website-picture" src="{{ asset("build/images/logo.png") }}" alt="Anime panda logo" width="30" height="40">
+        <a id="nav-link-homepage" class="nav link" href='{{ path("homepage") }}'>Home</a>
+        <a id="nav-link-series" class="nav link" href='{{ path("serie_index") }}'>Series</a>
+        <a id="nav-link-episodes" class="nav link" href='{{ path("episode_index") }}'>Episodes</a>
+        <a id="nav-link-tags" class="nav link" href='{{ path("tag_index") }}'>Tags</a>
+    </nav>
+
 </header>
