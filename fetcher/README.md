@@ -32,8 +32,8 @@
             }
         }
     - `url` : your anime list source
-    - `excludes` : exlude path including this
-    - `includes` : will only crawl if the url contains one of it
+    - `excludes` : exlude path including this (pretty sure you can use PCRE)
+    - `includes` : will only crawl if the url contains one of it (same as above)
     - `serverurl` : external server that physically have the videos
     - `videoselector` : css selector to get the url of the anime from
     - The other ones should be self-explanatory
