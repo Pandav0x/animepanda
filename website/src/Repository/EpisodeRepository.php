@@ -18,4 +18,15 @@ class EpisodeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Episode::class);
     }
+
+    /*public function findBySerie($serie_id)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.exampleField = :val')
+            ->setParameter('val', $serie_id)
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }*/
 }

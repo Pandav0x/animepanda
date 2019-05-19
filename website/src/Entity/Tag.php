@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SerieRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
-class Serie
+class Tag
 {
     /**
      * @ORM\Id()
@@ -24,14 +24,14 @@ class Serie
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="serie", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Episode", mappedBy="tags")
      */
     private $episodes;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $synopsis;
+    private $description;
 
     public function __construct()
     {
@@ -67,7 +67,7 @@ class Serie
     {
         if (!$this->episodes->contains($episode)) {
             $this->episodes[] = $episode;
-            $episode->setSerie($this);
+            $episode->addTag($this);
         }
 
         return $this;
@@ -77,27 +77,25 @@ class Serie
     {
         if ($this->episodes->contains($episode)) {
             $this->episodes->removeElement($episode);
-            if ($episode->getSerie() === $this) {
-                $episode->setSerie(null);
-            }
+            $episode->removeTag($this);
         }
 
         return $this;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return $this->name;
     }
 
-    public function getSynopsis(): ?string
+    public function getDescription(): ?string
     {
-        return $this->synopsis;
+        return $this->description;
     }
 
-    public function setSynopsis(?string $synopsis): self
+    public function setDescription(?string $description): self
     {
-        $this->synopsis = $synopsis;
+        $this->description = $description;
 
         return $this;
     }
