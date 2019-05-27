@@ -3,7 +3,7 @@
 ## Instalation
 
   - git clone
-  - cd animepanda_website
+  - cd animepanda
   - composer 
   - yarn dev
   
