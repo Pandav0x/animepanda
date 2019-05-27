@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block subtitle %}
+    Results for {% for tag in tags %}{{ tag | lower }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% endblock %}
+
+{% block main %}
+    {{ parent() }}
+
+    <h1>Results for the tags</h1>
+
+    {% for tag in tags %}
+        {% if loop.last %}and{% endif %}
+        {{ tag | lower }}
+        {% if not loop.last %},{% endif %}
+    {% endfor %}
+
+
+{% endblock %}

@@ -47,8 +47,8 @@ Encore
         corejs: 3
     })
 
-    // enables Sass/SCSS support
-    //.enableSassLoader()
+    // enables Less support
+    .enableLessLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();

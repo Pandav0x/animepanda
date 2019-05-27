@@ -4,11 +4,23 @@
 
 {% block main %}
     <h1>Pick your kink</h1>
-        <div id="tag-table">
-            {% for tag in tags %}
-                <a class="tag-item" href="{{ path('tag_show', {'id': tag.id}) }}">{{ tag.name }}</a>
-            {% else %}
-                    no tags found
-            {% endfor %}
-        </div>
+    <label class="switch" for="tag-any-all">
+        <input id="tag-any-all"type="checkbox">
+        <span class="slider round"></span>
+        any/all
+    </label>
+
+    <div id="tag-table">
+        {% for tag in tags %}
+            <a class="tag-item" id="{{ tag.name }}"  href="#">{{ tag.name }}</a>
+        {% else %}
+                no tags found
+        {% endfor %}
+    </div>
+    <button type="button" id="search-tags" data-url="{{ path('search_tags') }}">
+        Search
+    </button>
+    <button type="button" id="reset-tags">
+        Reset selection
+    </button>
 {% endblock %}
