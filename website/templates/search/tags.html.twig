@@ -8,12 +8,12 @@
     {{ parent() }}
 
     <h1>Results for the tags</h1>
-
-    {% for tag in tags %}
-        {% if loop.last %}and{% endif %}
-        {{ tag | lower }}
-        {% if not loop.last %},{% endif %}
-    {% endfor %}
-
+    <span id="tag-line">
+        {% for tag in tags %}
+            {% if loop.last %}and{% endif %}
+                <span class="tag-inline">{{ tag | lower }}<span class="tag-inline-delete"></span></span>
+            {% if not loop.last %},{% endif %}
+        {% endfor %}
+    </span>
 
 {% endblock %}

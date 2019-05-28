@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\TagRepository;
+use App\Repository\EpisodeController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +15,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/tags", name="search_tags", methods={"POST"})
+     * @Route("/tag", name="search_tags", methods={"POST"})
      * @ParamConverter("post")
      */
-    public function search(Request $request): Response
+    public function search(Request $request, TagRepository $tagRepo): Response
     {
         $tags = explode(',', $request->request->get("tags"));
-        
+
+
+
         return $this->render('search/tags.html.twig', [
             "tags" => $tags
         ]);

@@ -6,4 +6,6 @@ var currentPage = explodedUrl[explodedUrl.length - 2] + "s";
 if(explodedUrl.length == 4)
     currentPage= "homepage";
 
-document.querySelector("[id$='" + currentPage  + "']").classList.add("top-nav-selected");
+if(document.querySelector("[id$='" + currentPage  + "']") !== null){
+    document.querySelector("[id$='" + currentPage  + "']").classList.add("top-nav-selected");
+}

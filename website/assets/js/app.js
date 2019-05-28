@@ -5,7 +5,7 @@ require('../css/fonts.css');
 require('../css/app.less');
 
 //pictures
-require('../images/favicon.ico');   
+require('../images/favicon.ico');
 require('../images/logo.png');
 
 //fonts
@@ -48,7 +48,10 @@ require('../fonts/robotoslab-thin.woff2');
 
 
 //main functions
+//TODO in future updates of JS, use the "?." operator instead of checking if the selector is null
+
 document.addEventListener('DOMContentLoaded', function(){
     require('../js/header.js');
     require('../js/tags.js');
+    require('../js/search.js');
 }, false);

@@ -64,7 +64,7 @@ header{
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
         background-color: white;
-        color: @mainColor; 
+        color: @mainColor;
     }
 }
 
@@ -95,12 +95,12 @@ footer{
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row-start: 3;
-    grid-row-end: 3;  
+    grid-row-end: 3;
 
-    position: relative;  
-    bottom: 0;  
-    width: 100%;  
-    height: 2.5rem; 
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
 }
 
 /**
@@ -115,7 +115,7 @@ footer{
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 2;
-    grid-row-end: 2; 
+    grid-row-end: 2;
 
     .tag-item {
         white-space: nowrap;
@@ -128,7 +128,7 @@ footer{
         border: 1px;
         border-style: solid;
         border-color: @mainColor;
-    
+
         margin-top: 5px;
         border-radius: 5px;
 
@@ -146,9 +146,44 @@ footer{
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
         background-color: @mainColor;
-        color: white; 
+        color: white;
     }
 }
+
+#tag-line {
+    cursor: default;
+    .tag-inline {
+        padding: 3px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: @mainColor;
+        &:hover {
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            .tag-inline-delete:after{
+                content: ' x ';
+                background-color: @darkColor;
+                color: white;
+                border-radius: 50%;
+                margin: 5px;
+                width: 20px;
+                height: 20px;
+                top: 50%;
+                padding:2px;
+                font-size: 11px;
+            }
+
+            color: @mainColor;
+            background-color: white;
+        }
+    }
+}
+
+/**
+     Switch
+*/
 
 
 .switch {
@@ -181,7 +216,7 @@ footer{
             box-shadow: 0 0 1px white;
         }
     }
-          
+
     .slider {
         position: absolute;
         top: 0;
@@ -202,14 +237,14 @@ footer{
             background-color: @mainColor;
             -webkit-transition: .4s;
             transition: .4s;
-        } 
+        }
 
         &.round {
             border-radius: 34px;
 
             &:before {
                 border-radius: 50%;
-            }    
+            }
         }
     }
 }
