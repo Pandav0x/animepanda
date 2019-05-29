@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {{ parent() }}
+
+    <h1>Results for the terms</h1>
+    <ul>
+    {% for serie in series %}
+        <li>{{ serie.name }}</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

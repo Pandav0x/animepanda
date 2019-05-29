@@ -1,20 +1,23 @@
 @import '../css/fonts.css';
 
-@mainColor: deeppink;
+@mainColor: #ff1493;
+@darkerMainColor: #a71060;
 @darkColor: #250016;
 
 @latinFont: Raleway Regular, sans-serif;
 @cyrillicFont: Robotoslab Regular;
 @japaneseFont: NotoSerifJP Regular;
-@koreanFont: NotoSerifKR Regular; //notoserifkr
+@koreanFont: NotoSerifKR Regular;
 
 body {
     background-color: @darkColor;
     color: white;
     overflow-x: hidden;
+
     display: grid;
-    grid-template-rows: 3;
-    grid-template-columns: 2;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto minmax(auto, 300px);
+    justify-items: stretch;
 
     font-family: @latinFont;
 }
@@ -32,39 +35,78 @@ body {
     header
 */
 header{
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 1;
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 1;
+
 
     display: grid;
     grid-template-rows: 1;
-    grid-template-columns: 5;
-}
+    grid-template-columns: auto auto auto auto auto auto;
 
-#top-nav{
-    background-color: @mainColor;
-    height:50px;
-    margin: 0px;
-    padding:0px auto;
+    #top-nav{
+        background-color: @mainColor;
 
-    .list {
-        text-align: center;
+        grid-column: 1 / span 6;
 
-        li {
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
+        display:grid;
+
+
+        height:50px;
+        margin: 0px;
+        padding:0px auto;
+
+        .nav {
+            li, form{
+                height: 100%;
+            }
         }
-    }
 
-    [class$="-selected"]{
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-        background-color: white;
-        color: @mainColor;
+        a:hover{
+            background-color: @darkerMainColor;
+            color: white;
+        }
+
+        [id^="nav-component"]:not([id^="nav-website"]){
+            margin: auto;
+            width: 50%;
+            align-items: stretch;
+        }
+
+        #nav-website-picture{
+            grid-column: 1 / span 1;
+        }
+
+        #nav-link-homepage{
+            grid-column: 2 / span 1;
+
+        }
+
+        #nav-link-series{
+            grid-column: 3 / span 1;
+        }
+
+        #nav-link-episodes{
+            grid-column: 4 / span 1;
+        }
+
+        #nav-link-tags{
+            grid-column: 5 / span 1;
+        }
+
+        #nav-input{
+            grid-column: 6 / span 1;
+        }
+
+
+
+        [class$="-selected"]{
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            background-color: white;
+            color: @mainColor;
+        }
     }
 }
 
@@ -72,32 +114,28 @@ header{
     main
 */
 main{
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 2;
-    grid-row-end: 2;
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+
+    justify-content: center;
+    align-items: stretch;
+    align-content: start;
 }
 
 /**
     aside
 */
 aside{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 2;
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
 }
 
 /**
     footer
 */
 footer{
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 3;
-    grid-row-end: 3;
-
-    position: relative;
+    grid-column: 1 / span 2;
+    align-self: end;
     bottom: 0;
     width: 100%;
     height: 2.5rem;
@@ -111,6 +149,8 @@ footer{
 
     padding-right: 300px;
     padding-left: 300px;
+
+    cursor: default;
 
     grid-column-start: 2;
     grid-column-end: 2;
@@ -247,4 +287,22 @@ footer{
             }
         }
     }
+}
+
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: @darkColor;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+	background: @mainColor;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: @darkerMainColor;
 }

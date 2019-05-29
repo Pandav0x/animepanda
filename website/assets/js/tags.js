@@ -1,5 +1,7 @@
 'use strict';
 
+import { fromByteArray } from "ipaddr.js";
+
 if(document.getElementsByClassName("tag-item") !== null)
 {
     document.getElementsByClassName("tag-item").forEach(function(element){
@@ -14,7 +16,7 @@ if(document.getElementById("search-tags") !== null)
     document.getElementById("search-tags").addEventListener("click", function(){
         var tags = [];
         document.getElementsByClassName("tag-selected").forEach(function(el){
-            tags.push(el.innerHTML);
+            tags.push(el.id);
         });
 
         redirectPost(
@@ -35,18 +37,22 @@ if(document.getElementById("reset-tags") !== null)
 
 
 function redirectPost(url, data) {
-    var form = document.createElement('form');
-    document.body.appendChild(form);
-    form.method = 'post';
-    form.action = url;
+    if(document.getElementById("tags-temp-form") === null)
+    {
+        var form = document.createElement('form');
+        document.body.appendChild(form);
+        form.setAttribute("type", "hidden");
+        form.method = 'post';
+        form.action = url;
+        form.id = "tags-temp-form";
 
-    var input = document.createElement('input');
-    input.name = "tags";
-    input.value = JSON.parse(data);
-    form.appendChild(input);
+        var input = document.createElement('input');
+        input.setAttribute("type", "hidden");
+        input.name = "tags";
+        input.value = JSON.parse(data);
+        form.appendChild(input);
 
-    form.submit();
-
-    console.log(form);
+        form.submit();
+    }
 }
 

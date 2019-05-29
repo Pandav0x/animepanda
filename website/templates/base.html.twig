@@ -5,12 +5,12 @@
         <link rel="icon" href="{{ asset('build/images/favicon.ico') }}">
         <title>
             {% block title %}
-                Anime Panda - 
-                {% block subtitle %} 
-                
+                Anime Panda -
+                {% block subtitle %}
+
                 {% endblock %}
             {% endblock %}
-        </title>        
+        </title>
         {% block stylesheets %}
             {{ encore_entry_link_tags("app") }}
         {% endblock %}
@@ -24,11 +24,13 @@
             </main>
 
             <aside>
-                {% block aside %}{% endblock %}
+                {% block aside %}
+                    aside
+                {% endblock %}
             </aside>
 
             {% include 'partials/footer.html.twig' %}
-            
+
             {% block javascripts %}
                 {{ encore_entry_script_tags("app") }}
             {% endblock %}

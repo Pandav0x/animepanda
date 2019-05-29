@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block subtitle %}
-    Results for {% for tag in tags %}{{ tag | lower }}{% if not loop.last %}, {% endif %}{% endfor %}
+    Results for {% for tag in tags %}{{ tag.name | lower }}{% if not loop.last %}, {% endif %}{% endfor %}
 {% endblock %}
 
 {% block main %}
@@ -11,9 +11,17 @@
     <span id="tag-line">
         {% for tag in tags %}
             {% if loop.last %}and{% endif %}
-                <span class="tag-inline">{{ tag | lower }}<span class="tag-inline-delete"></span></span>
+                <span class="tag-inline">{{ tag.name | lower }}<span class="tag-inline-delete"></span></span>
             {% if not loop.last %},{% endif %}
         {% endfor %}
     </span>
+
+    <ul>
+    {% for tag in tags %}
+        {% for episode in tag.episodes %}
+            <li>{{episode.url}}</li>
+        {% endfor %}
+    {% endfor %}
+    </ul>
 
 {% endblock %}

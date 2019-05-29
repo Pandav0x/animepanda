@@ -12,7 +12,7 @@
 
     <div id="tag-table">
         {% for tag in tags %}
-            <a class="tag-item" id="{{ tag.name }}"  href="#">{{ tag.name }}</a>
+            <a class="tag-item" id="{{ tag.id }}">{{ tag.name }}</a>
         {% else %}
                 no tags found
         {% endfor %}
