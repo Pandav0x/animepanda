@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Studio index{% endblock %}
+
+{% block body %}
+    <h1>Studio index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Website</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for studio in studios %}
+            <tr>
+                <td>{{ studio.id }}</td>
+                <td>{{ studio.name }}</td>
+                <td>{{ studio.website }}</td>
+                <td>
+                    <a href="{{ path('studio_show', {'id': studio.id}) }}">show</a>
+                    <a href="{{ path('studio_edit', {'id': studio.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('studio_new') }}">Create new</a>
+{% endblock %}

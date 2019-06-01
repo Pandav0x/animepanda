@@ -37,10 +37,15 @@ class SearchController extends AbstractController
     public function searchSerie(Request $request, SerieRepository $serieRepo): Response
     {
         $words = $request->request->get("search");
-        $series = $serieRepo->findByNameContains($words);
 
-        return $this->render('search/series.html.twig', [
-            "series" => $series
+        $episodes = [];
+        foreach($serieRepo->findByNameContains($words) as $serie)
+            foreach($serie->getEpisodes() as $episode)
+            $episodes[] = $episode;
+
+        return $this->render('episode/index.html.twig', [
+            "episodes" => $episodes,
+            "search" => $words
         ]);
     }
 }

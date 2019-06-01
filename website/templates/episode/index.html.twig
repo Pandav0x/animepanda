@@ -3,43 +3,23 @@
 {% block title %}Episode index{% endblock %}
 
 {% block main %}
-    <h1>Episode index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Number</th>
-                <th>Url</th>
-                <th>Tags</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    {% if search is defined %}
+        <h1>Results for terms: {{ search }}</h1>
+    {% else %}
+        <h1>Episodes List</h1>
+    {% endif %}
+    <div id="episode-brick-wrapper">
         {% for episode in episodes %}
-            <tr>
-                <td>{{ episode.id }}</td>
-                <td>{{ episode.number }}</td>
-                <td>{{ episode.url }}</td>
-                <td>
-                    <ul>
-                    {% for tag in episode.tags %}
-                        <li>{{ tag.name }}</li>
-                    {% endfor %}
-                    </ul>
-                </td>
-                <td>
-                    <a href="{{ path('episode_show', {'id': episode.id}) }}">show</a>
-                    <a href="{{ path('episode_edit', {'id': episode.id}) }}">edit</a>
-                </td>
-            </tr>
+            <a href='{{ path("episode_show", {"id": episode.id }) }}' class="episode-brick">
+                <div class="episode-thumbnail" data-thumb-image="{{ episode.thumbnailImage }}" data-thumb-video="{{ episode.thumbnailVideo }}"></div>
+                <small class="episode-title-list">{{ episode.serie.name }} - Episode {{ episode.number}}</small>
+            </a>
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+            {% if search is defined %}
+                <p>Sorry, no results found for the terms: {{ search }}</p>
+            {% else %}
+                <p>Sorry, the database is certainly kaputt and we need to figure out wtf is happening</p>
+            {% endif %}
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('episode_new') }}">Create new</a>
+    </div>
 {% endblock %}

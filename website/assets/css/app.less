@@ -38,7 +38,6 @@ header{
     grid-column: 1 / span 2;
     grid-row: 1 / span 1;
 
-
     display: grid;
     grid-template-rows: 1;
     grid-template-columns: auto auto auto auto auto auto;
@@ -50,7 +49,6 @@ header{
 
         display:grid;
 
-
         height:50px;
         margin: 0px;
         padding:0px auto;
@@ -60,45 +58,34 @@ header{
                 height: 100%;
             }
         }
-
         a:hover{
             background-color: @darkerMainColor;
             color: white;
         }
-
-        [id^="nav-component"]:not([id^="nav-website"]){
-            margin: auto;
-            width: 50%;
-            align-items: stretch;
-        }
-
         #nav-website-picture{
             grid-column: 1 / span 1;
         }
-
         #nav-link-homepage{
             grid-column: 2 / span 1;
-
         }
-
         #nav-link-series{
             grid-column: 3 / span 1;
         }
-
         #nav-link-episodes{
             grid-column: 4 / span 1;
         }
-
         #nav-link-tags{
             grid-column: 5 / span 1;
         }
-
         #nav-input{
             grid-column: 6 / span 1;
         }
 
-
-
+        [id^="nav-component"]{
+            margin: auto;
+            width: 50%;
+            align-items: stretch;
+        }
         [class$="-selected"]{
             -webkit-transition: all 0.5s ease;
             -moz-transition: all 0.5s ease;
@@ -179,7 +166,6 @@ footer{
             color: black;
         }
     }
-
     [class$="selected"]{
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
@@ -214,7 +200,6 @@ footer{
                 padding:2px;
                 font-size: 11px;
             }
-
             color: @mainColor;
             background-color: white;
         }
@@ -222,28 +207,23 @@ footer{
 }
 
 /**
-     Switch
+     Switch toggle
 */
-
-
 .switch {
     position: relative;
     display: inline-block;
     width: 40px;
     height: 20px;
-
     input {
         .switch {
             opacity: 0;
             width: 0;
             height: 0;
         }
-
         &:checked {
             & + .slider {
                 background-color: @mainColor;
             }
-
             & + .slider:before {
                 background-color: white;
                 -webkit-transform: translateX(18px);
@@ -251,7 +231,6 @@ footer{
                 transform: translateX(18px);
             }
         }
-
         &:focus + .slider {
             box-shadow: 0 0 1px white;
         }
@@ -266,7 +245,6 @@ footer{
         background-color: white;
         -webkit-transition: .4s;
         transition: .4s;
-
         &:before {
             position: absolute;
             content: "";
@@ -278,10 +256,8 @@ footer{
             -webkit-transition: .4s;
             transition: .4s;
         }
-
         &.round {
             border-radius: 34px;
-
             &:before {
                 border-radius: 50%;
             }
@@ -289,6 +265,9 @@ footer{
     }
 }
 
+/**
+    Scrollbar
+*/
 
 ::-webkit-scrollbar {
 	width: 5px;
@@ -305,4 +284,43 @@ footer{
 
 ::-webkit-scrollbar-thumb:hover {
 	background: @darkerMainColor;
+}
+
+/**
+    Brick episode list
+*/
+#episode-brick-wrapper{
+    a{
+        display: inline-block;
+        text-align: center;
+        padding: 5px;
+        padding-left:50px;
+        padding-bottom: 50px;
+        word-wrap: break-word;
+        width:330px; //TODO: store this in a variable
+
+        div{
+            background-image: url('https://www.2ndrun.fr/wp-content/uploads/2018/06/bobbypills-event-peepoodo3.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            height:200px;
+            width:330px;
+            min-height: 100%;
+            max-height: 100%;
+            &:hover{
+                background-image: url("https://i.imgur.com/gPMuKiK.gif");
+            }
+        }
+        .episode-title-list{
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .episode-thumbnail{
+
+        }
+    }
+
 }

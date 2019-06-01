@@ -39,6 +39,31 @@ class Episode
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $views;
+
+    /**
+     * @ORM\Column(type="date_immutable")
+     */
+    private $releaseDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Studio", inversedBy="episodes")
+     */
+    private $studio;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $thumbnailImage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $thumbnailVideo;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -116,5 +141,65 @@ class Episode
 
         return $this->getSerie()->getName()." ".$this->getNumber();
 
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    public function getReleaseDate(): ?\DateTimeImmutable
+    {
+        return $this->releaseDate;
+    }
+
+    public function setReleaseDate(\DateTimeImmutable $releaseDate): self
+    {
+        $this->releaseDate = $releaseDate;
+
+        return $this;
+    }
+
+    public function getStudio(): ?Studio
+    {
+        return $this->studio;
+    }
+
+    public function setStudio(?Studio $studio): self
+    {
+        $this->studio = $studio;
+
+        return $this;
+    }
+
+    public function getThumbnailImage(): ?string
+    {
+        return $this->thumbnailImage;
+    }
+
+    public function setThumbnailImage(string $thumbnailImage): self
+    {
+        $this->thumbnailImage = $thumbnailImage;
+
+        return $this;
+    }
+
+    public function getThumbnailVideo(): ?string
+    {
+        return $this->thumbnailVideo;
+    }
+
+    public function setThumbnailVideo(string $thumbnailVideo): self
+    {
+        $this->thumbnailVideo = $thumbnailVideo;
+
+        return $this;
     }
 }
