@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+require "autoload_db.php";
+
+use Symfony\Component\Finder\Finder;
+use App\Helper\ConsoleColors;
+
+class Program
+{
+    public static function main() : void
+    {
+        $finder = new Finder();
+        $finder->files()->in(__DIR__ . '/src/scripts')->name('*.php')->notName('Example.php');
+        foreach ($finder as $file) {
+            $className = ("App\scripts\\" . substr($file->getFilename(), 0, -4));
+            echo $file->getFilename() . "\n";
+            $object = new $className();
+            $object->setUp();
+            $object->execute();
+            $object->cleanUp();
+            echo "\n";
+        }
+    }
+}
+
+if (isset($argv[1])) {
+    switch($argv[1]) {
+        case "phpunit":
+            ob_start();
+            shell_exec('composer install');
+            $output = ob_get_clean();
+            echo $output;
+            break;
+        case "print":
+            ConsoleColors::write("voiture", ConsoleColors::FOREGROUND["YELLOW"]);
+            break;
+        default:
+            echo "\"".$argv[1]."\" is not a valid argument";
+            break;
+    }
+} else {
+    Program::main();
+}

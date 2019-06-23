@@ -1,0 +1,20 @@
+{
+  "type": "project",
+  "license": "proprietary",
+  "require": {
+    "symfony/var-dumper": "^4.2",
+    "symfony/finder": "^4.2",
+    "ext-pdo": "*",
+    "phpunit/phpunit": "^8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}
