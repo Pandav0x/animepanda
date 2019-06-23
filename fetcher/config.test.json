@@ -1,0 +1,33 @@
+{
+    "website":{
+        "baseUrl": "127.0.0.1:3001",
+        "crawlingUrl": "/" ,
+        "excludes" : [
+
+        ],
+        "includes" : [
+
+        ],
+        "serverurl" : "anime.repos.com",
+        "videoselector" : "iframe.metaframe.rptss"
+    },
+    "database":{
+        "host": "127.0.0.1" ,
+        "port" : "3306" ,
+        "user": "root",
+        "password" : "" ,
+        "database" : "animepanimepandasave"
+    },
+    "crawler":
+    {
+        "depth": 3,
+        "userAgent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+        "maxRequestsPerSecond": 3,
+        "maxConcurrentRequests": 20
+    },
+    "websiteDummy":{
+        "layerUrls":["anime-list", "anime-serie", "anime-episode"],
+        "layerRedundance": 10,
+        "lastLayerTarget":""
+    }
+}
