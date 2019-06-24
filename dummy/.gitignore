@@ -1,5 +1,6 @@
 #app config files
 config.json
+dummy/pages/*
 
 # Logs
 logs

@@ -52,24 +52,41 @@ function createPages()
 {
     var files = [];
     fs.readFile("./app/basePage.html" ,"utf8", function(err, baseDocumentContent) {
-
+        var currentContent = "";
         for(var i = config["websiteDummy"]["layerUrls"].length; i > 0; i--)
         {
             for(var j = 0; j < Math.pow(config["websiteDummy"]["layerRedundance"], (i-1)); j++)
             {
-                var currentContent = baseDocumentContent;
+                currentContent = baseDocumentContent;
                 if(files[i] == undefined)
                 {
                     files.push(i);
                     files[i] = [];
                 }
+
                 var fileName = randString(20);
-                currentContent.replace(/%TITLE%/, fileName + "");
-                console.log(currentContent);
-                return;
+                currentContent = currentContent.replace(/%TITLE%/g, fileName);
+
                 fs.writeFile("./pages/" + fileName + ".html", "", function(err){});
                 files[i].push(fileName);
             }
+            files.forEach(function(element){
+                console.log();
+                var bodyContent = "";
+                if(i-1 >= 0 && i-1 != config["websiteDummy"]["layerUrls"].length)
+                {
+                    console.log(files[i-1]);
+                    var index = Math.floor(Math.random()*files.length);
+                    bodyContent = "<a href='" + files[index] + "'>Link</a>";
+                    files.splice(index, 1);
+                    //console.log(bodyContent + "\n");
+                }
+
+                currentContent = currentContent.replace(/%BODY%/g, bodyContent);
+
+                fs.writeFile("./pages/" + fileName + ".html", "", function(err){});
+            });
         }
     });
+
 }
