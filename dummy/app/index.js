@@ -18,10 +18,10 @@ cleanPages();
 console.log("generating new pages");
 createPages();
 
-
-http.listen(3000, function(){
+//TODO remove comment chars to make if functional
+/*http.listen(3000, function(){
     console.log('listening on *:3001');
-});
+});*/
 
 app.get('/*', function(request, responce){
     responce.sendFile(__dirname+  "/pages/index.html");
@@ -51,42 +51,38 @@ function cleanPages()
 function createPages()
 {
     var files = [];
-    fs.readFile("./app/basePage.html" ,"utf8", function(err, baseDocumentContent) {
-        var currentContent = "";
-        for(var i = config["websiteDummy"]["layerUrls"].length; i > 0; i--)
+    var baseDocumentContent = fs.readFileSync("./app/basePage.html").toString();
+    console.log(baseDocumentContent);
+    var currentContent = "";
+    for(var i = config["websiteDummy"]["layerUrls"].length; i > 0; i--)
+    {
+        for(var j = 0; j < Math.pow(config["websiteDummy"]["layerRedundance"], (i-1)); j++) //V fichiers
         {
-            for(var j = 0; j < Math.pow(config["websiteDummy"]["layerRedundance"], (i-1)); j++)
+            currentContent = baseDocumentContent;
+            if(files[i] == undefined)
             {
-                currentContent = baseDocumentContent;
-                if(files[i] == undefined)
-                {
-                    files.push(i);
-                    files[i] = [];
-                }
-
-                var fileName = randString(20);
-                currentContent = currentContent.replace(/%TITLE%/g, fileName);
-
-                fs.writeFile("./pages/" + fileName + ".html", "", function(err){});
-                files[i].push(fileName);
+                files.push(i);
+                files[i] = [];
             }
-            files.forEach(function(element){
-                console.log();
-                var bodyContent = "";
-                if(i-1 >= 0 && i-1 != config["websiteDummy"]["layerUrls"].length)
-                {
-                    console.log(files[i-1]);
-                    var index = Math.floor(Math.random()*files.length);
-                    bodyContent = "<a href='" + files[index] + "'>Link</a>";
-                    files.splice(index, 1);
-                    //console.log(bodyContent + "\n");
-                }
 
-                currentContent = currentContent.replace(/%BODY%/g, bodyContent);
-
-                fs.writeFile("./pages/" + fileName + ".html", "", function(err){});
-            });
+            var fileName = randString(20);
+            currentContent = currentContent.replace(/%TITLE%/g, fileName);
+            files[i].push(fileName);
         }
-    });
+    }
+    for(var k = config["websiteDummy"]["layerUrls"].length - 1; k > 0; k--) //
+    {
+        console.log("allow ! ", k-1);
+        var bodyContent = "";
+        if(k-1 >= 0 && k-1 != config["websiteDummy"]["layerUrls"].length)
+        {
+            var index = Math.floor(Math.random()*files.length);
+            console.log(files, index);
+            bodyContent = "<a href='" + files[i] + "'>Link</a>";
+            files.splice(index, 1);
+        }
+        currentContent = currentContent.replace(/%BODY%/g, bodyContent);
+        fs.writeFile("./pages/" + fileName + ".html", currentContent, function(err){});
+    }
 
 }
