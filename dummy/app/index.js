@@ -17,17 +17,24 @@ cleanPages();
 
 console.log("generating new pages");
 createPages();
-fillPages()
+var indexPage = fillPages();
+
+console.log(indexPage);
 
 /*http.listen(3000, function(){
     console.log('listening on *:3001');
-});*/
+});
+
+app.get('/', function(request, responce){
+    responce.sendFile(__dirname+  "/pages/" + indexPage + ".html");
+});
 
 app.get('/*', function(request, responce){
     responce.sendFile(__dirname+  "/pages/index.html");
-});
+});*/
 
-function randString(length) {
+function randString(length)
+{
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -35,36 +42,77 @@ function randString(length) {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
- }
+}
 
+function getPages()
+{
+    return fs.readdirSync("./pages/");
+}
+
+function getRandomIndex(array)
+{
+    return array[Math.floor(Math.random() * array.length)];
+}
 
 function cleanPages()
 {
-    fs.readdir("./pages", (err, files) => {
-        files.forEach(file => {
-            fs.unlinkSync("./pages/" + file);
-        });
+    var files = getPages();
+    files.forEach(file => {
+        fs.unlinkSync("./pages/" + file);
     });
+}
+
+function sumPow(number, power)
+{
+    return (Math.pow(number,power) - 1) / (number - 1);
 }
 
 function createPages()
 {
     var baseDocumentContent = fs.readFileSync("./app/basePage.html").toString();
-    var numberFiles = Math.pow(config["websiteDummy"]["layerRedundance"],(config["websiteDummy"]["layerUrls"].length - 1));
+    var numberFiles = sumPow(config["websiteDummy"]["layerRedundance"],
+                        config["websiteDummy"]["layerUrls"].length);
+
     for(var i = 0; i < numberFiles; i++)
     {
         var fileName = randString(20);
-        fs.writeFile("./pages/" + fileName + ".html",
-        baseDocumentContent.replace(/%TITLE%/g, fileName),
-            function(err){}
-        );
+        fs.writeFileSync("./pages/" + fileName + ".html",
+            baseDocumentContent.replace(/%TITLE%/g, fileName), function(err){});
     }
-    console.log("number of files generated: " + numberFiles);
 }
 
 function fillPages()
 {
-    fs.readdir("./pages/", function(error, files){
-        //console.log(files);
-    });
+    var files = getPages();
+    var stuffing = "";
+    var index;
+    for(var i = 0; i <= (config["websiteDummy"]["layerUrls"].length - 1); i++)
+    {
+        var baseDocumentContent;
+        for(var j = 0; j < Math.pow(config["websiteDummy"]["layerRedundance"], i); j++)
+        {
+            var stuffingName = getRandomIndex(files);
+            files.splice(files.indexOf(stuffingName), 1);
+            if(j % config["websiteDummy"]["layerRedundance"] == 0)
+            {
+                console.log(stuffing != "");
+                if(stuffing != "")
+                {
+                    fs.writeFileSync("./pages/" + stuffedName, baseDocumentContent.replace(/%BODY%/g, stuffing),function(err){});
+                    stuffing = "";
+                }
+                var stuffedName = getRandomIndex(files);
+                if(stuffedName == null)
+                    break;
+                baseDocumentContent = fs.readFileSync("./pages/" + stuffedName).toString();
+                files.splice(files.indexOf(stuffedName), 1);
+
+            }
+            stuffing += "<a href='" + stuffingName + "'>" + stuffingName + "</a>";
+            if(i == 0)
+                index = stuffedName;
+        }
+        console.log("layer: " + i + " pages linked: " + j)
+    }
+    return index;
 }
