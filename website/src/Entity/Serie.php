@@ -19,12 +19,7 @@ class Serie
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="serie", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="serie", orphanRemoval=true, cascade={"persist"})
      */
     private $episodes;
 
@@ -33,26 +28,20 @@ class Serie
      */
     private $synopsis;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Name", mappedBy="serie", orphanRemoval=true, cascade={"persist"})
+     */
+    private $names;
+
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
+        $this->names = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -87,7 +76,7 @@ class Serie
 
     public function __toString(): string
     {
-        return $this->name;
+        return "";
     }
 
     public function getSynopsis(): ?string
@@ -100,5 +89,45 @@ class Serie
         $this->synopsis = $synopsis;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Name[]
+     */
+    public function getNames(): Collection
+    {
+        return $this->names;
+    }
+
+    public function addName(Name $name): self
+    {
+        if (!$this->names->contains($name)) {
+            $this->names[] = $name;
+            $name->setSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeName(Name $name): self
+    {
+        if ($this->names->contains($name)) {
+            $this->names->removeElement($name);
+            // set the owning side to null (unless already changed)
+            if ($name->getSerie() === $this) {
+                $name->setSerie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDefaultName(): Name
+    {
+        foreach($this->names as $name)
+        {
+            if($name->getIsDefault())
+                return $name;
+        }
     }
 }

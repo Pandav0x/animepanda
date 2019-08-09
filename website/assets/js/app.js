@@ -1,8 +1,10 @@
 'use strict';
 
 //style files
-require('../css/fonts.css');
+require('../css/fonts.less');
+require('../css/colors.less');
 require('../css/app.less');
+require('../css/tags.less');
 
 //pictures
 require('../images/favicon.ico');

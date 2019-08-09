@@ -29,7 +29,7 @@ class Studio
     private $website;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="studio")
+     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="studio", cascade={"persist"})
      */
     private $episodes;
 

@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Repository\TagRepository;
+use App\Repository\NameRepository;
 use App\Repository\SerieRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
@@ -34,14 +35,18 @@ class SearchController extends AbstractController
      * @Route("/episodes", name="search_series", methods={"POST"})
      * @ParamConverter("post")
      */
-    public function searchSerie(Request $request, SerieRepository $serieRepo): Response
+    public function searchSerie(Request $request, NameRepository $nameRepo): Response
     {
         $words = $request->request->get("search");
 
         $episodes = [];
-        foreach($serieRepo->findByNameContains($words) as $serie)
-            foreach($serie->getEpisodes() as $episode)
-            $episodes[] = $episode;
+        foreach($nameRepo->findByTextContains($words) as $name)
+        {
+            foreach($name->getSerie()->getEpisodes() as $episode)
+            {
+                $episodes[] = $episode;
+            }    
+        }
 
         return $this->render('episode/index.html.twig', [
             "episodes" => $episodes,

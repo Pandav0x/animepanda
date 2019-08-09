@@ -12,7 +12,7 @@
         {% for episode in episodes %}
             <a href='{{ path("episode_show", {"id": episode.id }) }}' class="episode-brick">
                 <div class="episode-thumbnail" data-thumb-image="{{ episode.thumbnailImage }}" data-thumb-video="{{ episode.thumbnailVideo }}"></div>
-                <small class="episode-title-list">{{ episode.serie.name }} - Episode {{ episode.number}}</small>
+                <small class="episode-title-list">{{ episode.serie.defaultName.text }} - Episode {{ episode.number}}</small>
             </a>
         {% else %}
             {% if search is defined %}

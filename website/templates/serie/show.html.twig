@@ -3,24 +3,21 @@
 {% block title %}Serie{% endblock %}
 
 {% block main %}
-    <h1>Serie</h1>
+    <h1>{{ serie.defaultName.text }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ serie.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ serie.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h2>Episodes</h2>
+    <ul>
+        {% for episode in serie.episodes %}
+            <li>
+                <a href='{{ path("episode_show", {"id": episode.id }) }}'>Episode {{ episode.number }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 
+    <h2>Synopsis</h2>
+    <p>
+        {{ serie.synopsis }}
+    </p>
     <a href="{{ path('serie_index') }}">back to list</a>
 
-    <a href="{{ path('serie_edit', {'id': serie.id}) }}">edit</a>
-
-    {{ include('serie/_delete_form.html.twig') }}
 {% endblock %}

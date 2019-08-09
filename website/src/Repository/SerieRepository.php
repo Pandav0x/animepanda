@@ -19,18 +19,6 @@ class SerieRepository extends ServiceEntityRepository
         parent::__construct($registry, Serie::class);
     }
 
-    public function findByNameContains($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.name LIKE :val')
-            ->setParameter('val', "%".$value."%")
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
     /*
     public function findOneBySomeField($value): ?Serie
     {

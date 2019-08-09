@@ -1,0 +1,19 @@
+<div id="side-nav-wrapper">
+    <ul>
+        <li>
+            <a href='{{ path("homepage") }}'>
+                <img id="nav-website-picture" src="{{ asset("build/images/logo.png") }}" alt="Anime panda logo" width="30" height="40">
+            </a>
+        </li>
+        <li><a id="nav-link-studios" class="nav link" href='{{ path("studio_index") }}'>Studios</a></li>
+        <li><a id="nav-link-series" class="nav link" href='{{ path("serie_index") }}'>Series</a></li>
+        <li><a id="nav-link-episodes" class="nav link" href='{{ path("episode_index") }}'>Episodes</a></li>
+        <li><a id="nav-link-tags" class="nav link" href='{{ path("tag_index") }}'>Tags</a></li>
+        <li>
+            <form id="nav-input" class="nav" action='{{ path("search_series") }}' method="POST">
+                <input id="nav-input-search" placeholder="search" name="search" type="text">
+                <input id="nav-input-button" type="submit" value="SEARCH">
+            </form>
+        </li>
+    </ul>
+</div>

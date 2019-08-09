@@ -29,13 +29,13 @@ class Episode
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Serie", inversedBy="episodes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Serie", inversedBy="episodes", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $serie;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="episodes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="episodes", cascade={"persist"})
      */
     private $tags;
 
@@ -50,7 +50,7 @@ class Episode
     private $releaseDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Studio", inversedBy="episodes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Studio", inversedBy="episodes", cascade={"persist"})
      */
     private $studio;
 

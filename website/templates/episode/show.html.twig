@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block subtitle %}
-    {{ episode.serie.name }} Episode {{ episode.number }}
+    {#{{ episode.serie.name }} Episode {{ episode.number }}#}
 {% endblock %}
 
 {% block main %}
-    <h1>{{ episode.serie.name }} Episode {{ episode.number }}</h1>
+    {#<h1>{{ episode.serie.name }} Episode {{ episode.number }}</h1>#}
 
     <video width="320" height="240" controls>
         <source src="{{ episode.url }}" type="video/mp4">
@@ -29,7 +29,7 @@
     <ul>
         {% for ep in episode.serie.episodes | slice(0, 4) %}
             {% if ep.id != episode.id %}
-            <li><a href="{{ path('episode_show',{'id': ep.id}) }}">{{ ep.serie.name }} - Episode {{ ep.number }}</a></li>
+            {#<li><a href="{{ path('episode_show',{'id': ep.id}) }}">{{ ep.serie.name }} - Episode {{ ep.number }}</a></li>#}
             {% endif %}
         {% endfor %}
     </ul>
@@ -39,7 +39,7 @@
         {% for tag in episode.tags %}
             {% for ep in tag.episodes | slice(0, 20) %}
                 {% if ep.id != episode.id %}
-                    <li><a href="{{ path('episode_show', {'id': ep.id}) }}">{{ tag.name }} tag: {{ ep.serie.name }} Ep {{ ep.number }}</a></li>
+                    {#<li><a href="{{ path('episode_show', {'id': ep.id}) }}">{{ tag.name }} tag: {{ ep.serie.name }} Ep {{ ep.number }}</a></li>#}
                 {% endif %}
             {% endfor %}
         {% endfor %}
