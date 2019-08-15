@@ -1,6 +1,6 @@
-if(document.getElementsByClassName("episode-brick"))
+if(document.getElementsByClassName("episode-tile"))
 {
-    document.getElementsByClassName("episode-brick").forEach(function(element){
+    document.getElementsByClassName("episode-tile").forEach(function(element){
         element.children[0].style.backgroundImage = "url('" + element.children[0].getAttribute("data-thumb-image") +"')";
         element.children[0].addEventListener("mouseenter", function(){
             element.children[0].style.backgroundImage = "url('" + element.children[0].getAttribute("data-thumb-video") + "')";

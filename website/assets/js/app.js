@@ -5,6 +5,7 @@ require('../css/fonts.less');
 require('../css/colors.less');
 require('../css/app.less');
 require('../css/tags.less');
+require('../css/carousel.less');
 
 //pictures
 require('../images/favicon.ico');
@@ -57,4 +58,5 @@ document.addEventListener('DOMContentLoaded', function(){
     require('../js/tags.js');
     require('../js/search.js');
     require('../js/episodes.js');
+    require('../js/carousel.js');
 }, false);
