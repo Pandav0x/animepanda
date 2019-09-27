@@ -33,12 +33,18 @@ class Serie
      */
     private $names;
 
+    /**
+     * Serie constructor.
+     */
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
         $this->names = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +58,10 @@ class Serie
         return $this->episodes;
     }
 
+    /**
+     * @param Episode $episode
+     * @return Serie
+     */
     public function addEpisode(Episode $episode): self
     {
         if (!$this->episodes->contains($episode)) {
@@ -62,6 +72,10 @@ class Serie
         return $this;
     }
 
+    /**
+     * @param Episode $episode
+     * @return Serie
+     */
     public function removeEpisode(Episode $episode): self
     {
         if ($this->episodes->contains($episode)) {
@@ -74,16 +88,26 @@ class Serie
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return "";
     }
 
+    /**
+     * @return string|null
+     */
     public function getSynopsis(): ?string
     {
         return $this->synopsis;
     }
 
+    /**
+     * @param string|null $synopsis
+     * @return Serie
+     */
     public function setSynopsis(?string $synopsis): self
     {
         $this->synopsis = $synopsis;
@@ -99,6 +123,10 @@ class Serie
         return $this->names;
     }
 
+    /**
+     * @param Name $name
+     * @return Serie
+     */
     public function addName(Name $name): self
     {
         if (!$this->names->contains($name)) {
@@ -109,6 +137,10 @@ class Serie
         return $this;
     }
 
+    /**
+     * @param Name $name
+     * @return Serie
+     */
     public function removeName(Name $name): self
     {
         if ($this->names->contains($name)) {
@@ -122,6 +154,9 @@ class Serie
         return $this;
     }
 
+    /**
+     * @return Name
+     */
     public function getDefaultName(): Name
     {
         foreach($this->names as $name)

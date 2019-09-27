@@ -17,6 +17,8 @@ class SerieController extends AbstractController
 {
     /**
      * @Route("/", name="serie_index", methods={"GET"})
+     * @param SerieRepository $serieRepository
+     * @return Response
      */
     public function index(SerieRepository $serieRepository): Response
     {
@@ -50,6 +52,8 @@ class SerieController extends AbstractController
 
     /**
      * @Route("/{id}", name="serie_show", methods={"GET"})
+     * @param Serie $serie
+     * @return Response
      */
     public function show(Serie $serie): Response
     {
@@ -60,6 +64,9 @@ class SerieController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="serie_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Serie $serie
+     * @return Response
      */
     public function edit(Request $request, Serie $serie): Response
     {
@@ -82,6 +89,9 @@ class SerieController extends AbstractController
 
     /**
      * @Route("/{id}", name="serie_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Serie $serie
+     * @return Response
      */
     public function delete(Request $request, Serie $serie): Response
     {

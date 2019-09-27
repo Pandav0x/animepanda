@@ -21,20 +21,55 @@ use App\Entity\Serie;
 use App\Entity\Studio;
 use App\Entity\Tag;
 
+/**
+ * Class InstallationCommand
+ * @package App\Command
+ */
 class InstallationCommand extends Command
 {
+    /**
+     * @var string
+     */
     protected static $defaultName = "application:install";
+
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+
+    /**
+     * @var EpisodeRepository
+     */
     private $episodeRepository;
+
+    /**
+     * @var NameRepository
+     *
+     */
     private $nameRepository;
+
+    /**
+     * @var SerieRepository
+     *
+     */
     private $serieRepository;
+
+    /**
+     * @var StudioRepository
+     *
+     */
     private $studioRepository;
+
+    /**
+     * @var TagRepository
+     *
+     */
     private $tagRepository;
 
     /**
      * InstallationCommand constructor.
      * @param EntityManagerInterface $entityManager
-     * @param EpisodeRepository $episodeRepositor
+     * @param EpisodeRepository $episodeRepository
      * @param NameRepository $nameRepository
      * @param SerieRepository $serieRepository
      * @param StudioRepository $studioRepository
@@ -57,6 +92,9 @@ class InstallationCommand extends Command
         $this->tagRepository = $tagRepository;
     }
 
+    /**
+     * Command configuration
+     */
     protected function configure()
     {
         $this->setDescription("Install project with samples insertions in database.")
@@ -84,6 +122,7 @@ class InstallationCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|void|null
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

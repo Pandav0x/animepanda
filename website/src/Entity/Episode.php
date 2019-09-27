@@ -64,21 +64,34 @@ class Episode
      */
     private $thumbnailVideo;
 
+    /**
+     * Episode constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return int|null
+     */
     public function getNumber(): ?int
     {
         return $this->number;
     }
 
+    /**
+     * @param int $number
+     * @return Episode
+     */
     public function setNumber(int $number): self
     {
         $this->number = $number;
@@ -86,11 +99,18 @@ class Episode
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUrl(): ?string
     {
         return $this->url;
     }
 
+    /**
+     * @param string $url
+     * @return Episode
+     */
     public function setUrl(string $url): self
     {
         $this->url = $url;
@@ -98,11 +118,18 @@ class Episode
         return $this;
     }
 
+    /**
+     * @return Serie|null
+     */
     public function getSerie(): ?Serie
     {
         return $this->serie;
     }
 
+    /**
+     * @param Serie|null $serie
+     * @return Episode
+     */
     public function setSerie(?Serie $serie): self
     {
         $this->serie = $serie;
@@ -118,6 +145,10 @@ class Episode
         return $this->tags;
     }
 
+    /**
+     * @param Tag $tag
+     * @return Episode
+     */
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
@@ -127,6 +158,10 @@ class Episode
         return $this;
     }
 
+    /**
+     * @param Tag $tag
+     * @return Episode
+     */
     public function removeTag(Tag $tag): self
     {
         if ($this->tags->contains($tag)) {
@@ -136,6 +171,9 @@ class Episode
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
 
@@ -143,11 +181,18 @@ class Episode
 
     }
 
+    /**
+     * @return int|null
+     */
     public function getViews(): ?int
     {
         return $this->views;
     }
 
+    /**
+     * @param int $views
+     * @return Episode
+     */
     public function setViews(int $views): self
     {
         $this->views = $views;
@@ -155,11 +200,18 @@ class Episode
         return $this;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     */
     public function getReleaseDate(): ?\DateTimeImmutable
     {
         return $this->releaseDate;
     }
 
+    /**
+     * @param \DateTimeImmutable $releaseDate
+     * @return Episode
+     */
     public function setReleaseDate(\DateTimeImmutable $releaseDate): self
     {
         $this->releaseDate = $releaseDate;
@@ -167,11 +219,18 @@ class Episode
         return $this;
     }
 
+    /**
+     * @return Studio|null
+     */
     public function getStudio(): ?Studio
     {
         return $this->studio;
     }
 
+    /**
+     * @param Studio|null $studio
+     * @return Episode
+     */
     public function setStudio(?Studio $studio): self
     {
         $this->studio = $studio;
@@ -179,11 +238,18 @@ class Episode
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getThumbnailImage(): ?string
     {
         return $this->thumbnailImage;
     }
 
+    /**
+     * @param string $thumbnailImage
+     * @return Episode
+     */
     public function setThumbnailImage(string $thumbnailImage): self
     {
         $this->thumbnailImage = $thumbnailImage;
@@ -191,11 +257,18 @@ class Episode
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getThumbnailVideo(): ?string
     {
         return $this->thumbnailVideo;
     }
 
+    /**
+     * @param string $thumbnailVideo
+     * @return Episode
+     */
     public function setThumbnailVideo(string $thumbnailVideo): self
     {
         $this->thumbnailVideo = $thumbnailVideo;

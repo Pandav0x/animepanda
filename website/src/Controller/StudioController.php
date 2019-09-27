@@ -17,6 +17,8 @@ class StudioController extends AbstractController
 {
     /**
      * @Route("/", name="studio_index", methods={"GET"})
+     * @param StudioRepository $studioRepository
+     * @return Response
      */
     public function index(StudioRepository $studioRepository): Response
     {
@@ -27,6 +29,8 @@ class StudioController extends AbstractController
 
     /**
      * @Route("/new", name="studio_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class StudioController extends AbstractController
 
     /**
      * @Route("/{id}", name="studio_show", methods={"GET"})
+     * @param Studio $studio
+     * @return Response
      */
     public function show(Studio $studio): Response
     {
@@ -60,6 +66,9 @@ class StudioController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="studio_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Studio $studio
+     * @return Response
      */
     public function edit(Request $request, Studio $studio): Response
     {
@@ -82,6 +91,9 @@ class StudioController extends AbstractController
 
     /**
      * @Route("/{id}", name="studio_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Studio $studio
+     * @return Response
      */
     public function delete(Request $request, Studio $studio): Response
     {

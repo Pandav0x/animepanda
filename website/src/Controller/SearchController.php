@@ -19,6 +19,9 @@ class SearchController extends AbstractController
     /**
      * @Route("/tags", name="search_tags", methods={"POST"})
      * @ParamConverter("post")
+     * @param Request $request
+     * @param TagRepository $tagRepo
+     * @return Response
      */
     public function searchTags(Request $request, TagRepository $tagRepo): Response
     {
@@ -34,6 +37,9 @@ class SearchController extends AbstractController
     /**
      * @Route("/episodes", name="search_series", methods={"POST"})
      * @ParamConverter("post")
+     * @param Request $request
+     * @param NameRepository $nameRepo
+     * @return Response
      */
     public function searchSerie(Request $request, NameRepository $nameRepo): Response
     {

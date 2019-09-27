@@ -14,11 +14,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class NameRepository extends ServiceEntityRepository
 {
+    /**
+     * NameRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Name::class);
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function findByTextContains($value)
     {
         return $this->createQueryBuilder('n')

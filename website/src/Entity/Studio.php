@@ -33,21 +33,34 @@ class Studio
      */
     private $episodes;
 
+    /**
+     * Studio constructor.
+     */
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Studio
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -55,11 +68,18 @@ class Studio
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getWebsite(): ?string
     {
         return $this->website;
     }
 
+    /**
+     * @param string $website
+     * @return Studio
+     */
     public function setWebsite(string $website): self
     {
         $this->website = $website;
@@ -75,6 +95,10 @@ class Studio
         return $this->episodes;
     }
 
+    /**
+     * @param Episode $episode
+     * @return Studio
+     */
     public function addEpisode(Episode $episode): self
     {
         if (!$this->episodes->contains($episode)) {
@@ -85,6 +109,10 @@ class Studio
         return $this;
     }
 
+    /**
+     * @param Episode $episode
+     * @return Studio
+     */
     public function removeEpisode(Episode $episode): self
     {
         if ($this->episodes->contains($episode)) {

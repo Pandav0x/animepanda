@@ -32,16 +32,26 @@ class Name
      */
     private $isDefault;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
+    /**
+     * @param string $text
+     * @return Name
+     */
     public function setText(string $text): self
     {
         $this->text = $text;
@@ -49,11 +59,18 @@ class Name
         return $this;
     }
 
+    /**
+     * @return Serie|null
+     */
     public function getSerie(): ?Serie
     {
         return $this->serie;
     }
 
+    /**
+     * @param Serie|null $serie
+     * @return Name
+     */
     public function setSerie(?Serie $serie): self
     {
         $this->serie = $serie;
@@ -61,11 +78,18 @@ class Name
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsDefault(): ?bool
     {
         return $this->isDefault;
     }
 
+    /**
+     * @param bool $isDefault
+     * @return Name
+     */
     public function setIsDefault(bool $isDefault): self
     {
         $this->isDefault = $isDefault;
