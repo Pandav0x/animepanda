@@ -17,17 +17,18 @@
     </head>
     <body>
         {% block body %}
-            <nav>
-                {% include 'partials/nav.html.twig' %}
-            </nav>
+
+            <aside>
+                {% block aside %}{% endblock %}
+            </aside>
 
             <main>
                 {% block main %}{% endblock %}
             </main>
 
-            <aside>
-                {% block aside %}{% endblock %}
-            </aside>
+            <nav>
+                {% include 'partials/nav.html.twig' %}
+            </nav>
 
             {% include 'partials/footer.html.twig' %}
 
