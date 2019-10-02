@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\EpisodeRepository;
@@ -143,7 +142,7 @@ class InstallationCommand extends Command
 
         if(!$isDatabaseOn)
         {
-            $io->note('No database connection detected. All interractions are disabled.');
+            $io->note('No database connection detected. All interactions are disabled.');
         }
 
         $env = ($_ENV["APP_ENV"] == "prod") ? "build" : "dev";
