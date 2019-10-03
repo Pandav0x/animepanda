@@ -2,85 +2,68 @@
 
 namespace App\Tests\Command;
 
-use App\Command\InstallationCommand;
+use App\Entity\Episode;
+use App\Entity\Name;
+use App\Entity\Serie;
+use App\Entity\Studio;
+use App\Entity\Tag;
 use App\Repository\EpisodeRepository;
-use App\Repository\NameRepository;
-use App\Repository\SerieRepository;
-use App\Repository\StudioRepository;
-use App\Repository\TagRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Application;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * Class InstallationCommandTest
  * @package App\Tests\Command
  */
-class InstallationCommandTest extends TestCase
+class InstallationCommandTest extends KernelTestCase
 {
+    private $entityManager;
 
-    private $entityManagerInterfaceMock;
-    private $episodeRepositoryMock;
-    private $nameRepositoryMock;
-    private $serieRepositoryMock;
-    private $studioRepositoryMock;
-    private $tagRepositoryMock;
+    private $episodeRepository;
+    private $nameRepository;
+    private $serieRepository;
+    private $studioRepository;
+    private $tagRepository;
 
     private $commandTester;
 
     protected function setUp()
     {
-        $this->entityManagerInterfaceMock = $this->getMockBuilder(EntityManagerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $kernel = self::bootKernel();
+        $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
 
-        $this->episodeRepositoryMock = $this->getMockBuilder(EpisodeRepository::class)
-        ->disableOriginalConstructor()
-        ->getMock();
+        $application = new Application($kernel);
 
-        $this->nameRepositoryMock = $this->getMockBuilder(NameRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->serieRepositoryMock = $this->getMockBuilder(SerieRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->studioRepositoryMock = $this->getMockBuilder(StudioRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->tagRepositoryMock = $this->getMockBuilder(TagRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $application = new Application();
-        $application->add(new InstallationCommand(
-            $this->entityManagerInterfaceMock,
-            $this->episodeRepositoryMock,
-            $this->nameRepositoryMock,
-            $this->serieRepositoryMock,
-            $this->studioRepositoryMock,
-            $this->tagRepositoryMock
-        ));
         $command = $application->find('application:install');
         $this->commandTester = new CommandTester($command);
+
+        $this->episodeRepository = $this->entityManager->getRepository(Episode::class);
+
+        $this->nameRepository = $this->entityManager->getRepository(Name::class);
+
+        $this->serieRepository = $this->entityManager->getRepository(Serie::class);
+
+        $this->studioRepository = $this->entityManager->getRepository(Studio::class);
+
+        $this->tagRepository = $this->entityManager->getRepository(Tag::class);
     }
 
     protected function tearDown()
     {
-        $this->entityManagerInterfaceMock = null;
+        $this->entityManager = null;
 
-        $this->episodeRepositoryMock = null;
+        $this->commandTester = null;
 
-        $this->nameRepositoryMock = null;
+        $this->episodeRepository = null;
 
-        $this->serieRepositoryMock = null;
+        $this->nameRepository = null;
 
-        $this->studioRepositoryMock = null;
+        $this->serieRepository = null;
 
-        $this->tagRepositoryMock = null;
+        $this->studioRepository = null;
+
+        $this->tagRepository = null;
     }
 
     public function testInstallationCommandNoOption()
@@ -103,6 +86,12 @@ class InstallationCommandTest extends TestCase
 
         $this->assertContains('Inserting data', $commandDisplay);
         $this->assertContains('[OK]', $commandDisplay);
+
+        $this->assertGreaterThanOrEqual(1, $this->episodeRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->nameRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->serieRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->studioRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->tagRepository->count([]));
     }
 
     public function testInstallationCommandComposerOption()
@@ -142,5 +131,11 @@ class InstallationCommandTest extends TestCase
         $this->assertContains('yarn', $commandDisplay);
         $this->assertContains('Inserting data', $commandDisplay);
         $this->assertContains('[OK]', $commandDisplay);
+
+        $this->assertGreaterThanOrEqual(1, $this->episodeRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->nameRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->serieRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->studioRepository->count([]));
+        $this->assertGreaterThanOrEqual(1, $this->tagRepository->count([]));
     }
 }
