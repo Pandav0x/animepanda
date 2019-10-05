@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('exception') }}
+{% endblock %}
+
+{% block subtitle %}
+    {{ status_code }}
+{% endblock %}
+
+{% block body %}
+    <div id="container">
+        <div id="error-block">
+            <h1>
+                <div id="error-code">
+                    {{ status_code }}
+                </div>
+            </h1>
+            <h2>
+                <div id="error-message">
+                    {{ status_text  }}
+                </div>
+            </h2>
+        </div>
+    </div>
+{% endblock %}

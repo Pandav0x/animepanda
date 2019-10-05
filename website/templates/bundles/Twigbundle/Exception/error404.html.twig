@@ -1,0 +1,32 @@
+{% extends 'bundles/Twigbundle/Exception/exception.base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div data-picture=''>
+        <style>
+            body{
+                background-color: black;
+                overflow: hidden;
+            }
+
+            #container{
+                text-align: center;
+                vertical-align: center;
+                margin-top: auto;
+                padding: 45vh 0;
+
+                font-size: 2em;
+
+
+            }
+        </style>
+
+        <script>
+            setInterval(function(){
+                document.getElementById('error-block').style.color = '#' + (function co(lor){   return (lor +=
+                    [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
+                && (lor.length == 6) ?  lor : co(lor); })('');;
+            }, 100);
+        </script>
+
+{% endblock %}
