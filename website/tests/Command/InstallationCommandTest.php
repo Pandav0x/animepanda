@@ -7,7 +7,6 @@ use App\Entity\Name;
 use App\Entity\Serie;
 use App\Entity\Studio;
 use App\Entity\Tag;
-use App\Repository\EpisodeRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
