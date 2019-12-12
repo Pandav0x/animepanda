@@ -1,6 +1,6 @@
 # animepanda_website
 
-## Instalation
+## Installation
 
   - git clone
   - cd animepanda
