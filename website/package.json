@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "less": "^3.9.0",
-    "yarn": "^1.16.0"
+    "yarn": "^1.17.3"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^0.27.0",
