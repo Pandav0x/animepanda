@@ -107,7 +107,7 @@ class InstallationCommand extends Command
                 "composer",
                 "c",
                 InputOption::VALUE_NONE,
-                "Install and update composer dependancies."
+                "Install and update composer dependencies."
             )
             ->addOption(
                 "yarn",
@@ -120,10 +120,10 @@ class InstallationCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return int|void|null
+     * @return int
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $hasDataset = $input->getOption("dataset");
         $hasComposer = $input->getOption("composer");
@@ -259,5 +259,7 @@ class InstallationCommand extends Command
             }
         }
         $io->success('Installation complete.');
+
+        return 0;
     }
 }
