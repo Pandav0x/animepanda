@@ -10,12 +10,13 @@
     "build": "encore production --progress"
   },
   "dependencies": {
+    "core-js": "^3.5.0",
     "less": "^3.9.0",
     "yarn": "^1.16.0"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^0.27.0",
-    "less-loader": "^5.0.0",
+    "less-loader": "^4.1.0",
     "node-less": "^1.0.0",
     "webpack-notifier": "^1.6.0"
   }
