@@ -4,7 +4,7 @@ namespace App\EventListener;
 
 use App\Entity\Tracking;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class BrowsingListener
 {
@@ -23,11 +23,11 @@ class BrowsingListener
     }
 
     /**
-     * @param FilterControllerEvent $event
+     * @param ControllerEvent  $event
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         if (strpos(get_class($event->getController()[0]), 'App\\Controller') !== false) {
             $controllerName = str_replace('App\\Controller\\', '',
