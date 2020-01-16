@@ -27,17 +27,14 @@ class BrowsingListener
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function onKernelController(ControllerEvent $event)
+    public function onKernelController(ControllerEvent $event): void
     {
         if (strpos(get_class($event->getController()[0]), 'App\\Controller') !== false) {
-            $controllerName = str_replace('App\\Controller\\', '',
-                get_class($event->getController()[0]) . '\\' . $event->getController()[1]);
-
             $tracking = new Tracking();
             $tracking->setIp($event->getRequest()->getClientIp());
             $tracking->setPage($event->getRequest()->getPathInfo());
             $tracking->setTimestamp(time());
-            $tracking->setPostValues($event->getRequest()->get("tags"));
+            $tracking->setPostValues($event->getRequest()->get('tags'));
 
             $this->entityManager->persist($tracking);
             $this->entityManager->flush();

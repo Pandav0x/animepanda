@@ -25,12 +25,12 @@ class SearchController extends AbstractController
      */
     public function searchTags(Request $request, TagRepository $tagRepo): Response
     {
-        $tagIds = explode(',', $request->request->get("tags"));
+        $tagIds = explode(',', $request->request->get('tags'));
 
         $tags = $tagRepo->findById($tagIds);
 
         return $this->render('search/tags.html.twig', [
-            "tags" => $tags
+            'tags' => $tags
         ]);
     }
 
@@ -43,7 +43,7 @@ class SearchController extends AbstractController
      */
     public function searchSerie(Request $request, NameRepository $nameRepo): Response
     {
-        $words = $request->request->get("search");
+        $words = $request->request->get('search');
 
         $episodes = [];
         foreach($nameRepo->findByTextContains($words) as $name)
@@ -55,8 +55,8 @@ class SearchController extends AbstractController
         }
 
         return $this->render('episode/index.html.twig', [
-            "episodes" => $episodes,
-            "search" => $words
+            'episodes' => $episodes,
+            'search' => $words
         ]);
     }
 }

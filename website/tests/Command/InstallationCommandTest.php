@@ -27,7 +27,7 @@ class InstallationCommandTest extends KernelTestCase
 
     private $commandTester;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
         $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
@@ -48,7 +48,7 @@ class InstallationCommandTest extends KernelTestCase
         $this->tagRepository = $this->entityManager->getRepository(Tag::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->entityManager = null;
 
