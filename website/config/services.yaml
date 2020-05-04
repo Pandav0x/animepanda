@@ -31,3 +31,5 @@ services:
         arguments: ["@doctrine.orm.default_entity_manager"]
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
+
+    App\Factory\Widget\ItemListAdapter: ~

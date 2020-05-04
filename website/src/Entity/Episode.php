@@ -121,7 +121,7 @@ class Episode
     /**
      * @return Serie|null
      */
-    public function getSerie(): ?Serie
+    public function getSerie(): Serie
     {
         return $this->serie;
     }

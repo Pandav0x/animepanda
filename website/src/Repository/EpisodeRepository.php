@@ -23,6 +23,24 @@ class EpisodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Episode::class);
     }
 
+    public function getLast(?int $maxResults = 10)
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.id', 'ASC')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMostRecent(?int $maxResults = 10)
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.releaseDate', 'ASC')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*public function findBySerie($serie_id)
     {
         return $this->createQueryBuilder('s')

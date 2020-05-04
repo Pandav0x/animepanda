@@ -1,0 +1,12 @@
+{% for elements in elements %}
+    <a href="{{ element.targetLink }}" class="episode-brick">
+        <div class="episode-thumbnail" data-thumb-image="{{ episode.thumbnailImage }}" data-thumb-video="{{ episode.thumbnailVideo }}"></div>
+        <small class="episode-title-list">{{ episode.serie.defaultName.text }} - Episode {{ episode.number}}</small>
+    </a>
+{% else %}
+    {% if search is defined %}
+        <p>Sorry, no results found for the terms: {{ search }}</p>
+    {% else %}
+        <p>Sorry, the database is certainly kaputt and we need to figure out wtf is happening</p>
+    {% endif %}
+{% endfor %}

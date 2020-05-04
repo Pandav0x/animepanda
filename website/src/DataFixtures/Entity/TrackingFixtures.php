@@ -2,16 +2,18 @@
 
 namespace App\DataFixtures\Entity;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\DataFixtures\BaseFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class TrackingFixtures extends Fixture
+class TrackingFixtures extends BaseFixture
 {
-    public function load(ObjectManager $manager)
-    {
-        // $product = new Product();
-        // $manager->persist($product);
 
-        $manager->flush();
+    /**
+     * @param ObjectManager $manager
+     * @return mixed
+     */
+    protected function loadData(ObjectManager $manager)
+    {
+        // TODO: Implement loadData() method.
     }
 }

@@ -65,12 +65,12 @@ Encore
     //https://symfony.com/doc/current/frontend/encore/copy-files.html
     .copyFiles({
         from: 'assets/images/',
-        to: 'assets/dist/images/[name].[ext]',
+        to: 'assets/dist/images/[hash].[ext]',
         pattern: /\.(gif|jpe?g|tiff|png|webp|bmp)$/
     })
     .copyFiles({
         from: 'assets/images/',
-        to: 'assets/dist/icons/[name].[ext]',
+        to: 'assets/dist/icons/[hash].[ext]',
         pattern: /\.ico$/
     })
     .copyFiles({

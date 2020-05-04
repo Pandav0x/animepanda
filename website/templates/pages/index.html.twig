@@ -1,26 +1,21 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block subtitle %}
     Homepage
 {% endblock %}
 
 {% block main %}
-    <div class="youplay-carousel owl-carousel">
-        <a class="angled-img" href="#">
-            <div class="img">
-                <img class="episode-tile" height="200" src="http://images6.fanpop.com/image/photos/38600000/Skyrim-elder-scrolls-v-skyrim-38685086-1600-900.jpg">
-            </div>
-        </a>
-        <a class="angled-img" href="#">
-            <div class="img">
-                <img class="episode-tile" height="200" src="http://images6.fanpop.com/image/photos/38600000/Skyrim-elder-scrolls-v-skyrim-38685086-1600-900.jpg" alt="">
-            </div>
-        </a>
-        <a class="angled-img" href="#">
-            <div class="img">
-                <img class="episode-tile" height="200" src="http://images6.fanpop.com/image/photos/38600000/Skyrim-elder-scrolls-v-skyrim-38685086-1600-900.jpg" alt="">
-            </div>
-        </a>
+
+    <div>
+        <h2>最新のリリース</h2>
+
+        {% include 'widgets/item_list/carousel.html.twig' with { 'elements': lastEpisodes } %}
     </div>
+    <div>
+        <h2>Sorties recentes</h2>
+
+        {% include 'widgets/item_list/carousel.html.twig' with { 'elements': recentEpisodes } %}
+    </div>
+
 {% endblock %}
 

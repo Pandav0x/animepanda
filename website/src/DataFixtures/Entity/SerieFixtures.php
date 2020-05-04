@@ -2,16 +2,25 @@
 
 namespace App\DataFixtures\Entity;
 
-use App\Entity\Episode;
-use App\Entity\Name;
+use App\DataFixtures\BaseFixture;
 use App\Entity\Serie;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class SerieFixtures extends Fixture
+class SerieFixtures extends BaseFixture
 {
-    public function load(ObjectManager $manager)
+
+    /**
+     * @param ObjectManager $manager
+     * @return mixed
+     */
+    protected function loadData(ObjectManager $manager): void
     {
+        $this->createMany($this->faker->numberBetween(50, 80), 'serie', function(){
+            $serie = new Serie();
+            return $serie->setSynopsis($this->faker->text);
+        });
+
         $manager->flush();
     }
 }

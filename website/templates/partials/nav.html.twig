@@ -1,30 +1,30 @@
 <div id="side-nav-wrapper">
     <ul>
         <li>
-            <a href='{{ path("homepage") }}'>
-                <img id="nav-website-picture" src="{{ asset("build/images/logo.png") }}" alt="Anime panda logo" width="150" height="200">
+            <a href="{{ path("homepage") }}">
+                <img id="nav-website-picture" src="{{ asset("build/assets/dist/images/logo.png") }}" alt="Anime panda logo" width="150" height="200">
             </a>
         </li>
         <li>
-            <div class="nav-website-section">
-                <a id="nav-link-studios" class="nav link" href='{{ path("studio_index") }}'>Studios</a>
+            <div class="nav-website-section"><a id="nav-link-episodes" class="nav link" href="{{ path("episode_index") }}">Episodes</a>
             </div>
         </li>
         <li>
-            <div class="nav-website-section"><a id="nav-link-series" class="nav link" href='{{ path("serie_index") }}'>Series</a>
+            <div class="nav-website-section"><a id="nav-link-tags" class="nav link" href="{{ path("tag_index") }}">Tags</a>
             </div>
         </li>
         <li>
-            <div class="nav-website-section"><a id="nav-link-episodes" class="nav link" href='{{ path("episode_index") }}'>Episodes</a>
-            </div>
-        </li>
-        <li>
-            <div class="nav-website-section"><a id="nav-link-tags" class="nav link" href='{{ path("tag_index") }}'>Tags</a>
+            <div class="nav-website-section"><a id="nav-link-series" class="nav link" href="{{ path("serie_index") }}">Series</a>
             </div>
         </li>
         <li>
             <div class="nav-website-section">
-                <form id="nav-input-search-tags" class="nav" action='{{ path("search_series") }}' method="POST">
+                <a id="nav-link-studios" class="nav link" href="{{ path("studio_index") }}">Studios</a>
+            </div>
+        </li>
+        <li>
+            <div class="nav-website-section">
+                <form id="nav-input-search-tags" class="nav" action="{{ path("search_series") }}" method="POST">
                     <input id="nav-input-search" placeholder="search" name="search" type="text">
                     <input id="nav-input-button" type="submit" value="SEARCH">
                 </form>

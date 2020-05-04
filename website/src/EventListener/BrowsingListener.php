@@ -29,7 +29,13 @@ class BrowsingListener
      */
     public function onKernelController(ControllerEvent $event): void
     {
-        if (strpos(get_class($event->getController()[0]), 'App\\Controller') !== false) {
+        $controller = $event->getController();
+
+        if(is_array($event->getController())) {
+            $controller = $event->getController()[0];
+        }
+
+        if (strpos(get_class($controller), 'App\\Controller') !== false) {
             $tracking = new Tracking();
             $tracking->setIp($event->getRequest()->getClientIp());
             $tracking->setPage($event->getRequest()->getPathInfo());

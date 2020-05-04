@@ -2,15 +2,24 @@
 
 namespace App\DataFixtures\Entity;
 
-use App\Entity\Episode;
+use App\DataFixtures\BaseFixture;
 use App\Entity\Studio;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class StudioFixtures extends Fixture
+class StudioFixtures extends BaseFixture
 {
-    public function load(ObjectManager $manager)
+
+    /**
+     * @param ObjectManager $manager
+     * @return mixed
+     */
+    protected function loadData(ObjectManager $manager): void
     {
+        $this->createMany($this->faker->numberBetween(10, 15), 'studio', function(){
+            $studio = new Studio();
+            return $studio->setName($this->faker->name)
+                ->setWebsite($this->faker->url);
+        });
 
         $manager->flush();
     }

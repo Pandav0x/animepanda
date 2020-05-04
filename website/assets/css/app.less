@@ -1,7 +1,5 @@
-@import '../css/fonts.less';
-@import '../css/colors.less';
-@import '../css/scrollbar.less';
-@import '../css/pages/episodes.less';
+@import 'resources/colors';
+@import 'resources/fonts';
 
 body {
     height: 100vh;
@@ -12,15 +10,15 @@ body {
     overflow-x: hidden;
 
     display: grid;
-    grid-template-columns: minmax(auto, 5em) auto minmax(10em, 20em);
+    grid-template-columns: minmax(auto, 20vw) auto minmax(auto, 15vw); //TODO - ca serait cool de faire de l'autofit quand meme
     grid-template-rows: auto auto;
     justify-items: stretch;
 
-    font-family: @latinFont;
+    font-family: @japaneseFont;
 
     //css grid definition
-    main{
-        grid-column: 1 / span 1;
+    main {
+        grid-column: 2 / span 1;
         grid-row: 1 / span 1;
 
         justify-content: center;
@@ -28,42 +26,46 @@ body {
         align-content: start;
     }
 
-    nav{
-        grid-column: 3 / span 1;
+    nav {
+        grid-column: 1 / span 1;
         grid-row: 1 / span 2;
     }
 
-    aside{
-        grid-column: 1 / span 1;
+    aside {
+        grid-column: 3 / span 1;
         grid-row: 1 / span 1;
     }
 
-    footer{
-        grid-column: 1 / span 2;
+    footer {
+        grid-column: 2 / span 2;
         grid-row: 2 / span 1;
+
         align-self: end;
+        justify-content: center;
+        align-items: stretch;
+        align-content: start;
     }
 }
 
-.link{
+.link {
     text-decoration: none;
     color: inherit;
 }
 
-.list{
+.list {
     list-style: none;
 }
 
 /**
     header
 */
-#side-nav-wrapper{
+#side-nav-wrapper {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
 
     position: relative;
 
-    ul{
+    ul {
         list-style-type: none;
         padding: 0;
         margin: 0;
@@ -75,36 +77,36 @@ body {
         background-color: @menuBackgroundColor;
     }
 
-    li{
+    li {
         grid-column: span 1;
 
         margin: 0;
         padding: 0 auto;
 
-        #nav-website-picture{
+        #nav-website-picture {
             position: relative;
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        .nav-website-section{
+        .nav-website-section {
             position: relative;
             height: 100%;
             li,
-            form{
+            form {
                 position: relative;
                 height: 100%;
                 background-color: forestgreen;
             }
         }
 
-        &:hover{
+        &:hover {
             background-color: @menuHoverBackgroundColor;
             color: @menuHoverFontColor;
         }
 
-        [class$="-selected"]{
+        [class$="-selected"] {
             -webkit-transition: all 0.5s ease;
             -moz-transition: all 0.5s ease;
             -o-transition: all 0.5s ease;

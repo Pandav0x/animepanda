@@ -34,6 +34,11 @@ class Serie
     private $names;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coverImage;
+
+    /**
      * Serie constructor.
      */
     public function __construct()
@@ -93,7 +98,7 @@ class Serie
      */
     public function __toString(): string
     {
-        return "";
+        return '';
     }
 
     /**
@@ -161,8 +166,21 @@ class Serie
     {
         foreach($this->names as $name)
         {
-            if($name->getIsDefault())
+            if($name->getIsDefault()){
                 return $name;
+            }
         }
+    }
+
+    public function getCoverImage(): ?string
+    {
+        return $this->coverImage;
+    }
+
+    public function setCoverImage(?string $coverImage): self
+    {
+        $this->coverImage = $coverImage;
+
+        return $this;
     }
 }

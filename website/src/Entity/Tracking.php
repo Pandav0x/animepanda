@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Service\Encoder;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -87,7 +88,7 @@ class Tracking
      */
     public function __toString(): string
     {
-        return $this->ip . " " . $this->page;
+        return $this->ip . ' ' . $this->page;
     }
 
     /**

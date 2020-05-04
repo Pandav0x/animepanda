@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Factory\Widget\ItemListAdapter;
 use App\Repository\ContactRepository;
+use App\Repository\EpisodeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +15,26 @@ use App\Form\DTO\ContactHandler;
 
 class MainController extends AbstractController
 {
+    /** @var ItemListAdapter */
+    private $itemListAdapter;
+
+    /** @var EpisodeRepository */
+    private $episodeRepository;
+
+    public function __construct(EpisodeRepository $episodeRepository, ItemListAdapter $itemListAdapter)
+    {
+        $this->episodeRepository = $episodeRepository;
+        $this->itemListAdapter = $itemListAdapter;
+    }
+
     /**
      * @Route("/", name="homepage")
      */
     public function homepage(): Response
     {
-        return $this->render('pages/index.html.twig');
+        return $this->render('pages/index.html.twig', [
+            'lastEpisodes' => $this->itemListAdapter->createItemListFromEpisodes($this->episodeRepository->getLast()),
+            'recentEpisodes' => $this->itemListAdapter->createItemListFromEpisodes($this->episodeRepository->getMostRecent())
+        ]);
     }
 }
