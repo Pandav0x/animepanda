@@ -1,7 +1,5 @@
 'use strict';
 
-import { fromByteArray } from "ipaddr.js";
-
 if(document.getElementsByClassName("tag-item") !== null)
 {
     document.getElementsByClassName("tag-item").forEach(function(element){
