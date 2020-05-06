@@ -12,7 +12,7 @@ if(document.getElementsByClassName("tag-item") !== null)
 if(document.getElementById("search-tags") !== null)
 {
     document.getElementById("search-tags").addEventListener("click", function(){
-        var tags = [];
+        let tags = [];
         document.getElementsByClassName("tag-selected").forEach(function(el){
             tags.push(el.id);
         });
@@ -37,14 +37,14 @@ if(document.getElementById("reset-tags") !== null)
 function redirectPost(url, data) {
     if(document.getElementById("tags-temp-form") === null)
     {
-        var form = document.createElement('form');
+        let form = document.createElement('form');
         document.body.appendChild(form);
         form.setAttribute("type", "hidden");
         form.method = 'post';
         form.action = url;
         form.id = "tags-temp-form";
 
-        var input = document.createElement('input');
+        let input = document.createElement('input');
         input.setAttribute("type", "hidden");
         input.name = "tags";
         input.value = JSON.parse(data);
