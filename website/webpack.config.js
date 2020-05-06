@@ -35,6 +35,9 @@ Encore
         js: 'assets/js/[contenthash].js'
     })
 
+    .addLoader({ test: '/\.less$/', loader: 'less-loader' })
+    .addLoader({ test: /\.(png|jpg)$/, loader: 'url-loader' })
+
     .copyFiles({
         from: 'assets/images/',
         to: 'assets/images/[contenthash].[ext]',
