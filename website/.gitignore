@@ -23,3 +23,7 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> animepanda/pvx ###
+node_modules/
+###< animepanda/pvx ###
