@@ -38,6 +38,7 @@ Encore
     .addLoader({ test: '/\.less$/', loader: 'less-loader' })
     .addLoader({ test: /\.(png|jpg)$/, loader: 'url-loader' })
 
+    //TODO - Wait for webpack-encore PR#675 to be merged to get optimization as a native encore setting
     .copyFiles({
         from: 'assets/images/',
         to: 'assets/images/[contenthash].[ext]',
