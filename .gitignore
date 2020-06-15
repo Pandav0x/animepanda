@@ -27,3 +27,7 @@ yarn-error.log
 ###> animepanda/pvx ###
 node_modules/
 ###< animepanda/pvx ###
+
+##> tests ###
+*.cache
+###< test ###
