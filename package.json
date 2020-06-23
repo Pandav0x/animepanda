@@ -17,11 +17,11 @@
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^0.27.0",
+    "chai": "^4.2.0",
     "less-loader": "^4.1.0",
+    "mocha": "^7.1.1",
     "node-less": "^1.0.0",
     "url-loader": "^4.1.0",
-    "webpack-notifier": "^1.6.0",
-    "mocha": "^7.1.1",
-    "chai": "^4.2.0"
+    "webpack-notifier": "^1.6.0"
   }
 }

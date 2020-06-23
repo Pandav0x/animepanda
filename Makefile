@@ -21,5 +21,6 @@ fixture: db
 
 test:
 	php bin/phpunit
+	yarn tests
 
 install: vendor node_modules db
