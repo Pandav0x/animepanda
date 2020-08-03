@@ -49,13 +49,15 @@ class AssetLocator extends AbstractExtension
         $fileName = implode('.', $explodedPath);
 
         if ($this->assetExists(implode('.', [$fileName, $this->environmentName, $fileExtension]))) {
-            return dump($this->packages->getUrl(
-              sprintf('%s.%s.%s', $fileName, $this->environmentName, $fileExtension), $packageName)
+            return $this->packages->getUrl(
+              sprintf('%s.%s.%s', $fileName, $this->environmentName, $fileExtension),
+              $packageName
             );
         }
 
-        return dump($this->packages->getUrl(
-          sprintf('%s.%s.%s', $fileName, 'default', $fileExtension), $packageName)
+        return $this->packages->getUrl(
+          sprintf('%s.%s.%s', $fileName, 'default', $fileExtension),
+          $packageName
         );
     }
 
@@ -65,7 +67,7 @@ class AssetLocator extends AbstractExtension
      */
     private function assetExists(string $assetName): bool
     {
-        return $assetName === $this->packages->getUrl($assetName);
+        return sprintf('/%s', $assetName) !== $this->packages->getUrl($assetName);
     }
 
 }
