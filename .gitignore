@@ -25,6 +25,6 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> animepanda/pvx ###
-assets/images/*.(ico|png|jpeg|jpg|tiff|tif)
+assets/images/*
 !assets/images/*.default.(ico|png|jpeg|jpg|tiff|tif)
 ###< animepanda/pvx ###
