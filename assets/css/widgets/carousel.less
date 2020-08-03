@@ -30,7 +30,7 @@
         background: @back_color;
         -webkit-backface-visibility: hidden;
 
-        &>img {
+        & > img {
             width: 100%;
             height: auto;
             overflow-y: hidden;
@@ -40,6 +40,7 @@
             opacity: @images_opacity;
         }
     }
+
     &:hover .img > img {
         opacity: @images_hover_opacity;
     }
@@ -73,11 +74,13 @@
                 opacity: 0.8;
             }
         }
+
         .owl-prev,
         .owl-prev:hover {
             left: 0;
             background: linear-gradient(to right, @back_color, rgba(@back_color, 0));
         }
+        
         .owl-next,
         .owl-next:hover {
             // no use 0px - added 1px transparent gap

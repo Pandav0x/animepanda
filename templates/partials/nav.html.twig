@@ -2,15 +2,18 @@
     <ul>
         <li>
             <a href="{{ path("homepage") }}">
-                <img id="nav-website-picture" src="{{ asset("build/assets/images/logo.png") }}" alt="Anime panda logo" width="150" height="200">
+                <img id="nav-website-picture" src="{{ asset_locator("build/assets/images/logo.png") }}"
+                     alt="Anime panda logo" width="150" height="200">
             </a>
         </li>
         <li>
-            <div class="nav-website-section"><a id="nav-link-episodes" class="nav link" href="{{ path("episode_index") }}">Episodes</a>
+            <div class="nav-website-section"><a id="nav-link-episodes" class="nav link"
+                                                href="{{ path("episode_index") }}">Episodes</a>
             </div>
         </li>
         <li>
-            <div class="nav-website-section"><a id="nav-link-tags" class="nav link" href="{{ path("tag_index") }}">Tags</a>
+            <div class="nav-website-section"><a id="nav-link-tags" class="nav link"
+                                                href="{{ path("tag_index") }}">Tags</a>
             </div>
         </li>
         <li>
