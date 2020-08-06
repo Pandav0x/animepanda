@@ -12,7 +12,8 @@
             {% endblock %}
         </title>
         {% block stylesheets %}
-            {{ encore_entry_link_tags("app") }}
+            {{ encore_entry_link_tags("base") }}
+            {{ encore_entry_link_tags("partials/nav") }}
         {% endblock %}
     </head>
     <body>

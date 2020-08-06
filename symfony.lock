@@ -491,7 +491,7 @@
         },
         "files": [
             "./assets/css/app.css",
-            "./assets/js/app.js",
+            "./assets/js/base.js",
             "./config/packages/assets.yaml",
             "./config/packages/prod/webpack_encore.yaml",
             "./config/packages/webpack_encore.yaml",
