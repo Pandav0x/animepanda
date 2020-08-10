@@ -1,13 +1,19 @@
 .carousel-wrapper {
 
-    width: 100%;
+    max-width: 100%;
+
+    overflow-x: hidden;
 
     display: grid;
     grid-auto-flow: column;
 
-    grid-auto-columns: 100px;
+    grid-auto-columns: 250px;
 
     .carousel-item {
+
+        width: 100%;
+
+        display: inline-block;
 
         .carousel-item-link {
 
@@ -17,8 +23,12 @@
 
                 width: 100%;
 
-                .carousel-item-image {
+                height: 250px;
 
+                .carousel-item-image {
+                    display: block;
+
+                    height: 100%;
                 }
             }
         }
