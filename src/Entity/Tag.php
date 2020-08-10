@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
@@ -13,8 +14,9 @@ class Tag
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
@@ -39,9 +41,9 @@ class Tag
     }
 
     /**
-     * @return integer|null
+     * @return string|null
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
