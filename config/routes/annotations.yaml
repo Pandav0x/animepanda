@@ -1,3 +1,5 @@
 controllers:
     resource: ../../src/Controller/
     type: annotation
+    requirements:
+        _locale: 'en|fr|jp'

@@ -23,7 +23,7 @@
         "symfony/property-info": "5.0.*",
         "symfony/security-bundle": "5.0.*",
         "symfony/serializer": "5.0.*",
-        "symfony/translation": "5.0.*",
+        "symfony/translation": "5.1.*",
         "symfony/twig-bundle": "5.0.*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
