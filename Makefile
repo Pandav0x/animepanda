@@ -17,10 +17,12 @@ db:
 	php bin/console doctrine:migration:migrate --no-interaction --no-ansi --quiet
 
 fixture: db
-	php bin/console doctrine:fixtures:load --no-interaction --purge-with-truncate --no-ansi --quiet
+	php bin/console doctrine:fixtures:load --no-interaction --no-ansi --quiet
 
 test:
 	php bin/phpunit
 	yarn tests
 
 install: vendor node_modules db
+
+dev: install fixture

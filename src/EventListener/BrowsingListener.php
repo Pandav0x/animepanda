@@ -14,7 +14,6 @@ class BrowsingListener
     private $entityManager;
 
     /**
-     * BrowsingListener constructor.
      * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)
@@ -23,7 +22,7 @@ class BrowsingListener
     }
 
     /**
-     * @param ControllerEvent  $event
+     * @param ControllerEvent $event
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -31,16 +30,16 @@ class BrowsingListener
     {
         $controller = $event->getController();
 
-        if(is_array($event->getController())) {
+        if (is_array($event->getController())) {
             $controller = $event->getController()[0];
         }
 
         if (strpos(get_class($controller), 'App\\Controller') !== false) {
             $tracking = new Tracking();
-            $tracking->setIp($event->getRequest()->getClientIp());
-            $tracking->setPage($event->getRequest()->getPathInfo());
-            $tracking->setTimestamp(time());
-            $tracking->setPostValues($event->getRequest()->get('tags'));
+            $tracking->setIp($event->getRequest()->getClientIp())
+              ->setPage($event->getRequest()->getPathInfo())
+              ->setTimestamp(time())
+              ->setPostValues($event->getRequest()->get('tags'));
 
             $this->entityManager->persist($tracking);
             $this->entityManager->flush();

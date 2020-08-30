@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,8 +14,9 @@ class Serie
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
@@ -50,7 +52,7 @@ class Serie
     /**
      * @return int|null
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -164,9 +166,8 @@ class Serie
      */
     public function getDefaultName(): Name
     {
-        foreach($this->names as $name)
-        {
-            if($name->getIsDefault()){
+        foreach ($this->names as $name) {
+            if ($name->getIsDefault()) {
                 return $name;
             }
         }

@@ -1,88 +1,26 @@
-@back_color: #131313;
-@images_opacity: 0.6;
-@images_hover_opacity: 0.9;
-@skew_size: 8deg;
+.carousel-wrapper {
 
-/* Angled Images */
-.angled-img {
-    position: relative;
-    display: inline-block;
-    shape-outside: polygon(9% 0, 0 100%, 91% 100%, 100% 0%);
-    width: 400px;
-    height: 200px;
+    width: 100%;
 
-    &,
-    &:hover,
-    &:focus {
-        color: inherit;
-        text-decoration: none;
-        outline: none;
-    }
+    display: grid;
+    grid-auto-flow: column;
 
-    // image
-    .img {
-        width: 400px;
-        max-height: 100%;
-        position: relative;
-        overflow: hidden;
-        transform: skew(-@skew_size);
-        transform-origin: 50% 50%;
-        background: @back_color;
-        -webkit-backface-visibility: hidden;
+    grid-auto-columns: 100px;
 
-        &>img {
+    .carousel-item {
+
+        .carousel-item-link {
+
             width: 100%;
-            height: auto;
-            overflow-y: hidden;
-            transform: skew(@skew_size) scale(1.15);
-            transition: .3s opacity ease;
-            -webkit-backface-visibility: hidden;
-            opacity: @images_opacity;
-        }
-    }
-    &:hover .img > img {
-        opacity: @images_hover_opacity;
-    }
-}
 
-/* Carousel */
-.youplay-carousel {
-    // remove space between items
-    .angled-img {
-        margin-left: -1px;
-    }
+            .carousel-item-image-container {
 
-    // controls
-    .owl-nav {
-        margin: 0;
+                width: 100%;
 
-        .owl-prev,
-        .owl-next {
-            position: absolute;
-            cursor: pointer;
-            font-size: 2rem;
-            top: 0;
-            height: 100%;
-            width: 70px;
-            transition: .3s opacity ease;
-            opacity: 1;
-            margin: 0;
-            padding: 0;
+                .carousel-item-image {
 
-            &:hover {
-                opacity: 0.8;
+                }
             }
-        }
-        .owl-prev,
-        .owl-prev:hover {
-            left: 0;
-            background: linear-gradient(to right, @back_color, rgba(@back_color, 0));
-        }
-        .owl-next,
-        .owl-next:hover {
-            // no use 0px - added 1px transparent gap
-            right: -0.1px;
-            background: linear-gradient(to left, @back_color, rgba(@back_color, 0));
         }
     }
 }

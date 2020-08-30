@@ -1,7 +1,7 @@
-var Encore = require('@symfony/webpack-encore');
+let Encore = require('@symfony/webpack-encore');
 
 Encore
-    // directory where compiled assets will be stored
+// directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
@@ -10,10 +10,20 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
-    .addEntry('app', ['./assets/js/app.js', './assets/css/app.less'])
+    .addEntry('base', ['./assets/js/base.js', './assets/css/base.less'])
     .addEntry('scrollbar', './assets/css/scrollbar.less')
+
+    .addEntry('partials/nav', './assets/js/partials/nav.js')
+
     .addEntry('widget/masonry', './assets/css/widgets/masonry.less')
     .addEntry('widget/carousel', ['./assets/js/widgets/carousel.js', './assets/css/widgets/carousel.less'])
+
+    .addEntry('episode/show', './assets/js/episode/episode.show.js')
+    .addEntry('tag/index', './assets/js/tag/tag.index.js')
+
+    //search module
+    .addEntry('search/tags', './assets/js/search/search.tag.js')
+
     .addStyleEntry('exception', './assets/css/exceptions/exception.less')
 
     .splitEntryChunks()
@@ -25,7 +35,8 @@ Encore
     .enableBuildNotifications(false)
     .enableSourceMaps(!Encore.isProduction())
 
-    .configureBabel(() => {}, {
+    .configureBabel(() => {
+    }, {
         useBuiltIns: 'usage',
         corejs: 3
     })
@@ -35,8 +46,8 @@ Encore
         js: 'assets/js/[contenthash].js'
     })
 
-    .addLoader({ test: '/\.less$/', loader: 'less-loader' })
-    .addLoader({ test: /\.(png|jpg)$/, loader: 'url-loader' })
+    .addLoader({test: '/\.less$/', loader: 'less-loader'})
+    .addLoader({test: /\.(png|jpg)$/, loader: 'url-loader'})
 
     //TODO - Wait for webpack-encore PR#675 to be merged to get optimization as a native encore setting
     .copyFiles({

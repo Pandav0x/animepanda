@@ -2,17 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="{{ asset("build/assets/icons/favicon.ico") }}">
+        <link rel="icon" href="{{ asset_locator("build/assets/icons/favicon.ico") }}">
         <title>
             {% block title %}
-                Anime Panda -
-                {% block subtitle %}
-
-                {% endblock %}
+                Anime Panda - {% block subtitle %}{% endblock %}
             {% endblock %}
         </title>
         {% block stylesheets %}
-            {{ encore_entry_link_tags("app") }}
+            {{ encore_entry_link_tags("base") }}
+            {{ encore_entry_link_tags("partials/nav") }}
         {% endblock %}
     </head>
     <body>
@@ -33,7 +31,7 @@
             {% include 'partials/footer.html.twig' %}
 
             {% block javascripts %}
-                {{ encore_entry_script_tags("app") }}
+                {{ encore_entry_script_tags("base") }}
             {% endblock %}
         {% endblock %}
     </body>

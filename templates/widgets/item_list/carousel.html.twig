@@ -1,10 +1,12 @@
-{% for element in elements %}
-    <div class="youplay-carousel owl-carousel">
-        <a class="angled-img" href="{{ element.targetLink }}">
-            <div class="img">
-                <img class="episode-tile" height="200" src="{{ element.thumbnailImage }}">
-            </div>
-        </a>
-        <span>{{ element.text }} <small>{{ element.subText }}</small></span>
-    </div>
-{% endfor %}
+<div class="carousel-wrapper">
+    {% for element in elements %}
+        <div class="carousel-item">
+            <a class="carousel-item-link" href="{{ element.targetLink }}">
+                <div class="carousel-item-image-container">
+                    <img class="carousel-item-image" height="200" src="{{ element.thumbnailImage }}">
+                </div>
+            </a>
+            <span>{{ element.text }} <small>{{ element.subText }}</small></span>
+        </div>
+    {% endfor %}
+</div>

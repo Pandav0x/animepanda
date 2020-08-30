@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Service\Encoder;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,8 +12,9 @@ class Tracking
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
@@ -38,9 +39,9 @@ class Tracking
     private $postValues;
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }

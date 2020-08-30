@@ -11,6 +11,7 @@ use Faker\Generator;
 
 /**
  * Class BaseFixture
+ *
  * @package App\DataFixtures
  */
 abstract class BaseFixture extends Fixture
@@ -38,6 +39,7 @@ abstract class BaseFixture extends Fixture
 
     /**
      * TODO: changer ObjectManager(deprecated) par EntityManagerInterface
+     *
      * @param ObjectManager $manager
      */
     public function load(\Doctrine\Persistence\ObjectManager $manager): void
@@ -49,8 +51,8 @@ abstract class BaseFixture extends Fixture
     }
 
     /**
-     * @param int $count
-     * @param string $groupName
+     * @param int      $count
+     * @param string   $groupName
      * @param callable $factory
      */
     protected function createMany(int $count, string $groupName, callable $factory): void
@@ -86,7 +88,8 @@ abstract class BaseFixture extends Fixture
         }
 
         if (empty($this->referencesIndex[$groupName])) {
-            throw new \InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s"', $groupName));
+            throw new \InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s"',
+              $groupName));
         }
 
         $randomReferenceKey = $this->faker->randomElement($this->referencesIndex[$groupName]);
@@ -96,7 +99,7 @@ abstract class BaseFixture extends Fixture
 
     /**
      * @param string $className
-     * @param int $count
+     * @param int    $count
      * @return array
      */
     protected function getRandomReferences(string $className, int $count): array
@@ -126,11 +129,12 @@ abstract class BaseFixture extends Fixture
         }
 
         if (empty($this->referencesIndex[$groupName])) {
-            throw new \InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s"', $groupName));
+            throw new \InvalidArgumentException(sprintf('Did not find any references saved with the group name "%s"',
+              $groupName));
         }
 
-        foreach($this->referencesIndex[$groupName] as $referenceIndex) {
+        foreach ($this->referencesIndex[$groupName] as $referenceIndex) {
             yield $this->getReference($referenceIndex);
         }
-     }
+    }
 }
