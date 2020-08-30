@@ -7,12 +7,12 @@
 {% block main %}
 
     <div>
-        <h2>最新のリリース</h2>
+        <h2>{{ 'index.last_releases' | trans | capitalize }}</h2>
 
         {% include 'widgets/item_list/carousel.html.twig' with { 'elements': lastEpisodes } %}
     </div>
     <div>
-        <h2>Sorties recentes</h2>
+        <h2>{{ 'index.new_releases' | trans | capitalize }}</h2>
 
         {% include 'widgets/item_list/carousel.html.twig' with { 'elements': recentEpisodes } %}
     </div>
