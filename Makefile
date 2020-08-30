@@ -21,7 +21,15 @@ fixture: db
 
 test:
 	php bin/phpunit
-	yarn tests
+	yarn test
+
+test-unit:
+	php bin/phpunit --testsuite unit
+	yarn test --suite=unit
+
+test-integration:
+	php bin/phpunit --testsuite integration
+	yarn test --suite=integration
 
 install: vendor node_modules db
 
