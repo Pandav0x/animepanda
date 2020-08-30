@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -25,6 +24,12 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> animepanda/pvx ###
+node_modules/
 assets/images/*
 !assets/images/*.default.(ico|png|jpeg|jpg|tiff|tif)
 ###< animepanda/pvx ###
+
+##> tests ###
+*.cache
+###< test ###
+

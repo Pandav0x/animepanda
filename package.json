@@ -1,5 +1,5 @@
 {
-  "name": "Animepanda",
+  "name": "anime_panda",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -7,7 +7,8 @@
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
-    "build": "encore production --progress"
+    "build": "encore production --progress",
+    "test": "mocha --config ./tests/.mocharc.js"
   },
   "dependencies": {
     "core-js": "^3.5.0",
@@ -16,7 +17,9 @@
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^0.27.0",
+    "chai": "^4.2.0",
     "less-loader": "^4.1.0",
+    "mocha": "^7.1.1",
     "node-less": "^1.0.0",
     "url-loader": "^4.1.0",
     "webpack-notifier": "^1.6.0"
