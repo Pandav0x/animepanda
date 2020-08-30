@@ -1,13 +1,23 @@
 .carousel-wrapper {
 
-    width: 100%;
+    width: auto;
+
+    overflow-x: visible;
+    overflow-y: scroll;
+
+    position: relative;
+
+    box-sizing: border-box;
 
     display: grid;
     grid-auto-flow: column;
-
-    grid-auto-columns: 100px;
+    grid-auto-columns: 250px;
 
     .carousel-item {
+
+        width: 100%;
+
+        display: inline-block;
 
         .carousel-item-link {
 
@@ -17,8 +27,12 @@
 
                 width: 100%;
 
-                .carousel-item-image {
+                height: 250px;
 
+                .carousel-item-image {
+                    display: block;
+
+                    height: 100%;
                 }
             }
         }
