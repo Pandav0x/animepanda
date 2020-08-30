@@ -8,7 +8,7 @@
     "dev": "encore dev",
     "watch": "encore dev --watch",
     "build": "encore production --progress",
-    "test": "mocha --config ./tests/.mocharc.js --suite="
+    "test": "mocha --config ./tests/.mocharc.js"
   },
   "dependencies": {
     "core-js": "^3.5.0",
