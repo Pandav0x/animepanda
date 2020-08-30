@@ -1,12 +1,16 @@
 .carousel-wrapper {
 
-    max-width: 100%;
+    width: auto;
 
-    overflow-x: hidden;
+    overflow-x: visible;
+    overflow-y: scroll;
+
+    position: relative;
+
+    box-sizing: border-box;
 
     display: grid;
     grid-auto-flow: column;
-
     grid-auto-columns: 250px;
 
     .carousel-item {
