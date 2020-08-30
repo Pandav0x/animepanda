@@ -29,12 +29,14 @@ class MainController extends AbstractController
 
     /**
      * @Route("/", name="homepage")
+     * @param Request $request
+     * @return Response
      */
-    public function homepage(): Response
+    public function homepage(Request $request): Response
     {
         return $this->render('pages/index.html.twig', [
-            'lastEpisodes' => $this->itemListAdapter->createItemListFromEpisodes($this->episodeRepository->getLast()),
-            'recentEpisodes' => $this->itemListAdapter->createItemListFromEpisodes($this->episodeRepository->getMostRecent())
+          'lastEpisodes' => $this->itemListAdapter->createItemListFromEpisodes($this->episodeRepository->getLast()),
+          'recentEpisodes' => $this->itemListAdapter->createItemListFromEpisodes($this->episodeRepository->getMostRecent())
         ]);
     }
 }
