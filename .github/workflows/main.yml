@@ -24,4 +24,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Unit tests
-        run: make tests-unit
+        run: make test-unit
