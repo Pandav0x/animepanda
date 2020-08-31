@@ -1,13 +1,15 @@
 'use strict';
 
+let navElement = document.getElementById("side-nav-wrapper");
 let explodedUrl = (window.location + '').split('/');
 let currentPage = explodedUrl[explodedUrl.length - 2] + "s";
 
-if(explodedUrl.length === 4)
+if(explodedUrl.length === 4){
     currentPage= "homepage";
+}
 
-if(document.querySelector("[id$='" + currentPage  + "']") !== null){
-    document.querySelector("[id$='" + currentPage  + "']").classList.add("top-nav-selected");
+if(navElement.querySelector("[id$='" + currentPage  + "']") !== null){
+    navElement.querySelector("[id$='" + currentPage  + "']").classList.add("top-nav-selected");
 }
 
 document.getElementById("nav-input-button").addEventListener("click", function(){
