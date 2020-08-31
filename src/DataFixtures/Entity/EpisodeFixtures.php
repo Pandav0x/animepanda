@@ -48,7 +48,7 @@ class EpisodeFixtures extends BaseFixture implements DependentFixtureInterface
                 ->setSerie($this->getRandomReference('serie'))
                 ->setStudio($this->getRandomReference('studio'))
                 ->setNumber($this->faker->randomNumber(5))
-                ->setViews(0);
+                ->setViews($this->faker->numberBetween(0, 5000));
 
             $tags = $this->getRandomReferences('tag', $this->faker->numberBetween(2, 10));
 

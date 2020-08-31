@@ -26,7 +26,7 @@ class ItemListAdapter
             $this->router->generate('episode_show', ['id' => $episode->getId()]),
             $episode->getThumbnailImage(),
             $episode->getThumbnailVideo(),
-            $episode->getNumber() . ' views'
+            $episode->getViews() . ' views'
         );
     }
 
