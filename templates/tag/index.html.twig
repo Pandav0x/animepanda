@@ -2,6 +2,11 @@
 
 {% block title %}Tag index{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('tag/index') }}
+{% endblock %}
+
 {% block main %}
     <h1>Pick your kink</h1>
     {% if tags is not empty %}
@@ -30,4 +35,9 @@
             All the animePanda team is sorry for this hasle.
         </p>
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tag/index') }}
 {% endblock %}

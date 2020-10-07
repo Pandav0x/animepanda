@@ -13,14 +13,12 @@
 
     <h1>{{ episode.serie.defaultName }} Episode {{ episode.number }}</h1>
 
+    <a href="{{ path('episode_index') }}">back to list</a>
+
     <video width="320" height="240" controls>
         <source src="{{ episode.url }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-
-    <a href="{{ path('episode_index') }}">back to list</a>
-
-    <a href="{{ path('episode_edit', {'id': episode.id}) }}">edit</a>
 
     <h2>Tags</h2>
     <ul>
@@ -35,7 +33,7 @@
     <ul>
         {% for ep in episode.serie.episodes | slice(0, 4) %}
             {% if ep.id != episode.id %}
-                {#<li><a href="{{ path('episode_show',{'id': ep.id}) }}">{{ ep.serie.name }} - Episode {{ ep.number }}</a></li>#}
+                <li><a href="{{ path('episode_show',{'id': ep.id}) }}">{{ ep.serie.defaultName }} - Episode {{ ep.number }}</a></li>
             {% endif %}
         {% endfor %}
     </ul>
@@ -43,9 +41,9 @@
     <h2>With tag related</h2>
     <ul>
         {% for tag in episode.tags %}
-            {% for ep in tag.episodes | slice(0, 20) %}
+            {% for ep in tag.episodes | slice(0, 2) %}
                 {% if ep.id != episode.id %}
-                    {#<li><a href="{{ path('episode_show', {'id': ep.id}) }}">{{ tag.name }} tag: {{ ep.serie.name }} Ep {{ ep.number }}</a></li>#}
+                    <li><a href="{{ path('episode_show', {'id': ep.id}) }}">{{ tag.name }} tag: {{ ep.serie.defaultName }} Ep {{ ep.number }}</a></li>
                 {% endif %}
             {% endfor %}
         {% endfor %}

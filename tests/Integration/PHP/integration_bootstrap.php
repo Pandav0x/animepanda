@@ -3,11 +3,17 @@
 if (isset($_ENV['BOOTSTRAP_DATABASE_CREATION'])) {
     passthru(
         sprintf(
-            'php "%s/../../../bin/console" doctrine:database:drop --force --quiet --env=%s',
+            'php "%s/../../../bin/console" doctrine:database:drop --force --quiet --if-exists --env=%s',
             __DIR__,
             $_ENV['BOOTSTRAP_DATABASE_CREATION']
         )
     );
+
+    file_get_contents('ouaismaisnan.txt', sprintf(
+        'php "%s/../../../bin/console" doctrine:database:drop --force --quiet --if-exists --env=%s',
+        __DIR__,
+        $_ENV['BOOTSTRAP_DATABASE_CREATION']
+    ));
 
     passthru(
         sprintf(

@@ -13,13 +13,13 @@ Encore
     .addEntry('base', ['./assets/js/base.js', './assets/css/base.less'])
     .addEntry('scrollbar', './assets/css/scrollbar.less')
 
-    .addEntry('partials/nav', './assets/js/partials/nav.js')
+    .addEntry('partials/nav', ['./assets/js/partials/nav.js', './assets/css/partials/nav.less'])
 
     .addEntry('widget/masonry', './assets/css/widgets/masonry.less')
     .addEntry('widget/carousel', ['./assets/js/widgets/carousel.js', './assets/css/widgets/carousel.less'])
 
     .addEntry('episode/show', './assets/js/episode/episode.show.js')
-    .addEntry('tag/index', './assets/js/tag/tag.index.js')
+    .addEntry('tag/index', ['./assets/js/tag/tag.index.js', './assets/css/tag/tag.index.less'])
 
     //search module
     .addEntry('search/tags', './assets/js/search/search.tag.js')
